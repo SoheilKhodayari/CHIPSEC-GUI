@@ -1,0 +1,4 @@
+[console_scripts]
+chipsec_main = chipsec_main:main
+chipsec_util = chipsec_util:main
+

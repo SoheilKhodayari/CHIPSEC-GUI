@@ -1,0 +1,12 @@
+language: python
+python:
+  - "2.7"
+
+sudo: required
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y linux-headers-$(uname -r) nasm
+  - sudo ln -s /usr/src/$(uname -r) /lib/modules/$(uname -r)/build
+
+script:
+  - python setup.py test

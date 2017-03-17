@@ -1,0 +1,259 @@
+
+[*] Ignoring unsupported platform warning and continue execution
+################################################################
+##                                                            ##
+##  CHIPSEC: Platform Hardware Security Assessment Framework  ##
+##                                                            ##
+################################################################
+[CHIPSEC] Version 1.2.5
+[CHIPSEC] Arguments: -i
+****** Chipsec Linux Kernel module is licensed under GPL 2.0
+[CHIPSEC] API mode: using CHIPSEC kernel module API
+[91mERROR: Unsupported Platform: VID = 0x8086, DID = 0x7190[0m
+[91mERROR: Platform is not supported (Unsupported Platform: VID = 0x8086, DID = 0x7190).[0m
+[93mWARNING: Platform dependent functionality is likely to be incorrect[0m
+[CHIPSEC] OS      : Linux 4.4.0-64-generic #85-Ubuntu SMP Mon Feb 20 11:50:30 UTC 2017 x86_64
+[CHIPSEC] Platform: UnknownPlatform
+[CHIPSEC]      VID: 8086
+[CHIPSEC]      DID: 7190
+ 
+[*] loading common modules from "/usr/local/lib/python2.7/dist-packages/chipsec/modules/common" ..
+[+] loaded chipsec.modules.common.spi_fdopss
+[+] loaded chipsec.modules.common.ia32cfg
+[+] loaded chipsec.modules.common.rtclock
+[+] loaded chipsec.modules.common.bios_wp
+[+] loaded chipsec.modules.common.smrr
+[+] loaded chipsec.modules.common.bios_smi
+[+] loaded chipsec.modules.common.spi_lock
+[+] loaded chipsec.modules.common.smm
+[+] loaded chipsec.modules.common.bios_kbrd_buffer
+[+] loaded chipsec.modules.common.spi_desc
+[+] loaded chipsec.modules.common.bios_ts
+[+] loaded chipsec.modules.common.uefi.s3bootscript
+[+] loaded chipsec.modules.common.uefi.access_uefispec
+[+] loaded chipsec.modules.common.secureboot.variables
+[*] No platform specific modules to load
+[*] loading modules from "/usr/local/lib/python2.7/dist-packages/chipsec/modules" ..
+[+] loaded chipsec.modules.memconfig
+[+] loaded chipsec.modules.smm_dma
+[+] loaded chipsec.modules.remap
+[*] running loaded modules ..
+
+[*] running module: chipsec.modules.common.spi_fdopss
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/spi_fdopss.pyc
+[94m[x][ =======================================================================
+[x][ Module: SPI Flash Descriptor Security Override Pin-Strap
+[x][ =======================================================================[0m
+[*] HSFS = 0x56E9 << Hardware Sequencing Flash Status Register (SPIBAR + 0x4)
+    [00] FDONE            = 1 << Flash Cycle Done 
+    [01] FCERR            = 0 << Flash Cycle Error 
+    [02] AEL              = 0 << Access Error Log 
+    [03] BERASE           = 1 << Block/Sector Erase Size 
+    [05] SCIP             = 1 << SPI cycle in progress 
+    [13] FDOPSS           = 0 << Flash Descriptor Override Pin-Strap Status 
+    [14] FDV              = 1 << Flash Descriptor Valid 
+    [15] FLOCKDN          = 0 << Flash Configuration Lock-Down 
+[91m[-] FAILED: SPI Flash Descriptor Security Override is enabled[0m
+
+[*] running module: chipsec.modules.common.ia32cfg
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/ia32cfg.pyc
+[94m[x][ =======================================================================
+[x][ Module: IA32 Feature Control Lock
+[x][ =======================================================================[0m
+[*] Verifying IA32_Feature_Control MSR is locked on all logical CPUs..
+[*] cpu0: IA32_Feature_Control Lock = 1
+[*] cpu1: IA32_Feature_Control Lock = 1
+[*] cpu2: IA32_Feature_Control Lock = 1
+[*] cpu3: IA32_Feature_Control Lock = 1
+[92m[+] PASSED: IA32_FEATURE_CONTROL MSR is locked on all logical CPUs[0m
+
+[*] running module: chipsec.modules.common.rtclock
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/rtclock.pyc
+Skipping module chipsec.modules.common.rtclock since it is not supported in this platform
+
+[*] running module: chipsec.modules.common.bios_wp
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/bios_wp.pyc
+[94m[x][ =======================================================================
+[x][ Module: BIOS Region Write Protection
+[x][ =======================================================================[0m
+[*] BC = 0xFF << BIOS Control (b:d.f 00:31.0 + 0xDC)
+    [00] BIOSWE           = 1 << BIOS Write Enable 
+    [01] BLE              = 1 << BIOS Lock Enable 
+    [02] SRC              = 3 << SPI Read Configuration 
+    [04] TSS              = 1 << Top Swap Status 
+    [05] SMM_BWP          = 1 << SMM BIOS Write Protection 
+[91m[-] BIOS region write protection is disabled![0m
+
+[*] BIOS Region: Base = 0x008FD000, Limit = 0x004E9FFF
+SPI Protected Ranges
+------------------------------------------------------------
+PRx (offset) | Value    | Base     | Limit    | WP? | RP?
+------------------------------------------------------------
+PR0 (74)     | 1175E938 | 00938000 | 01175FFF | 0   | 1 
+PR1 (78)     | 80BBD7B0 | 017B0000 | 000BBFFF | 1   | 1 
+PR2 (7C)     | FFBCE9F8 | 009F8000 | 01FBCFFF | 1   | 1 
+PR3 (80)     | BB80CC80 | 00C80000 | 01B80FFF | 1   | 1 
+PR4 (84)     | B6E9F889 | 01889000 | 016E9FFF | 1   | 1 
+
+[91m[!] None of the SPI protected ranges write-protect BIOS region[0m
+
+[91m[!] BIOS should enable all available SMM based write protection mechanisms or configure SPI protected ranges to protect the entire BIOS region[0m
+[91m[-] FAILED: BIOS is NOT protected completely[0m
+
+[*] running module: chipsec.modules.common.smrr
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/smrr.pyc
+[94m[x][ =======================================================================
+[x][ Module: CPU SMM Cache Poisoning / System Management Range Registers
+[x][ =======================================================================[0m
+[91m[!] CPU does not support SMRR range protection of SMRAM[0m
+[93m[*] SKIPPED: CPU does not support SMRR range protection of SMRAM[0m
+
+[*] running module: chipsec.modules.common.bios_smi
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/bios_smi.pyc
+[94m[x][ =======================================================================
+[x][ Module: SMI Events Configuration
+[x][ =======================================================================[0m
+[92m[+] SMM BIOS region write protection is enabled (SMM_BWP is used)
+[0m
+[*] Checking SMI enables..
+    Global SMI enable: 1
+    TCO SMI enable   : 1
+[92m[+] All required SMI events are enabled[0m
+
+[*] Checking SMI configuration locks..
+[92m[+] TCO SMI configuration is locked (TCO SMI Lock)[0m
+[92m[+] SMI events global configuration is locked (SMI Lock)[0m
+
+[92m[+] PASSED: All required SMI sources seem to be enabled and locked[0m
+
+[*] running module: chipsec.modules.common.spi_lock
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/spi_lock.pyc
+[94m[x][ =======================================================================
+[x][ Module: SPI Flash Controller Configuration Lock
+[x][ =======================================================================[0m
+[*] HSFS = 0x56E9 << Hardware Sequencing Flash Status Register (SPIBAR + 0x4)
+    [00] FDONE            = 1 << Flash Cycle Done 
+    [01] FCERR            = 0 << Flash Cycle Error 
+    [02] AEL              = 0 << Access Error Log 
+    [03] BERASE           = 1 << Block/Sector Erase Size 
+    [05] SCIP             = 1 << SPI cycle in progress 
+    [13] FDOPSS           = 0 << Flash Descriptor Override Pin-Strap Status 
+    [14] FDV              = 1 << Flash Descriptor Valid 
+    [15] FLOCKDN          = 0 << Flash Configuration Lock-Down 
+[91m[-] FAILED: SPI Flash Controller configuration is not locked[0m
+
+[*] running module: chipsec.modules.common.smm
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/smm.pyc
+[94m[x][ =======================================================================
+[x][ Module: Compatible SMM memory (SMRAM) Protection
+[x][ =======================================================================[0m
+[*] PCI0.0.0_SMRAMC = 0x00 << System Management RAM Control (b:d.f 00:00.0 + 0x88)
+    [00] C_BASE_SEG       = 0 << SMRAM Base Segment = 010b 
+    [03] G_SMRAME         = 0 << SMRAM Enabled 
+    [04] D_LCK            = 0 << SMRAM Locked 
+    [05] D_CLS            = 0 << SMRAM Closed 
+    [06] D_OPEN           = 0 << SMRAM Open 
+[*] Compatible SMRAM is not enabled. Skipping..
+
+[*] running module: chipsec.modules.common.bios_kbrd_buffer
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/bios_kbrd_buffer.pyc
+[94m[x][ =======================================================================
+[x][ Module: Pre-boot Passwords in the BIOS Keyboard Buffer
+[x][ =======================================================================[0m
+[*] Keyboard buffer head pointer = 0x3A (at 0x41A), tail pointer = 0x3A (at 0x41C)
+[*] Keyboard buffer contents (at 0x41E):
+e0 50 e0 50 e0 50 e0 50 e0 50 e0 48 e0 48 e0 48 |  P P P P P H H H
+e0 48 e0 48 e0 48 e0 48 e0 48 0d 1c e0 50 e0 50 |  H H H H H   P P
+[91m[-] Keyboard buffer tail points inside the buffer (= 0x3A)[0m
+    It may potentially expose lengths of pre-boot passwords. Was your password 15 characters long?
+[*] Checking contents of the keyboard buffer..
+
+[93m[!] WARNING: Keyboard buffer is not empty. The test cannot determine conclusively if it contains pre-boot passwords.
+    The contents might have not been cleared by pre-boot firmware or overwritten with garbage.
+    Visually inspect the contents of keyboard buffer for pre-boot passwords (BIOS, HDD, full-disk encryption).[0m
+
+[*] running module: chipsec.modules.common.spi_desc
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/spi_desc.pyc
+[94m[x][ =======================================================================
+[x][ Module: SPI Flash Region Access Control
+[x][ =======================================================================[0m
+[*] FRAP = 0xE9F856BB << SPI Flash Regions Access Permissions Register (SPIBAR + 0x50)
+    [00] BRRA             = BB << BIOS Region Read Access 
+    [08] BRWA             = 56 << BIOS Region Write Access 
+    [16] BMRAG            = F8 << BIOS Master Read Access Grant 
+    [24] BMWAG            = E9 << BIOS Master Write Access Grant 
+[*] Software access to SPI flash regions: read = 0xBB, write = 0x56
+
+[92m[+] PASSED: SPI flash permissions prevent SW from writing to flash descriptor[0m
+
+[*] running module: chipsec.modules.common.bios_ts
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/bios_ts.pyc
+[94m[x][ =======================================================================
+[x][ Module: BIOS Interface Lock (including Top Swap Mode)
+[x][ =======================================================================[0m
+[*] BiosInterfaceLockDown (BILD) control = 0
+[*] BIOS Top Swap mode is enabled (TSS = 1)
+[*] RTC TopSwap control (TS) = 1
+[91m[-] FAILED: BIOS Interface is not locked (including Top Swap Mode)[0m
+
+[*] running module: chipsec.modules.common.uefi.s3bootscript
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/uefi/s3bootscript.pyc
+[93m[*] SKIPPED: OS does not support UEFI Runtime API[0m
+Skipping module chipsec.modules.common.uefi.s3bootscript since it is not supported in this platform
+
+[*] running module: chipsec.modules.common.uefi.access_uefispec
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/uefi/access_uefispec.pyc
+[93m[*] SKIPPED: OS does not support UEFI Runtime API[0m
+Skipping module chipsec.modules.common.uefi.access_uefispec since it is not supported in this platform
+
+[*] running module: chipsec.modules.common.secureboot.variables
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/common/secureboot/variables.pyc
+[93m[*] SKIPPED: OS does not support UEFI Runtime API[0m
+Skipping module chipsec.modules.common.secureboot.variables since it is not supported in this platform
+
+[*] running module: chipsec.modules.memconfig
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/memconfig.pyc
+Skipping module chipsec.modules.memconfig since it is not supported in this platform
+
+[*] running module: chipsec.modules.smm_dma
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/smm_dma.pyc
+[94m[x][ =======================================================================
+[x][ Module: SMM TSEG Range Configuration Check
+[x][ =======================================================================[0m
+[*] TSEG      : 0x0000000000000000 - 0x-000000000000001 (size = 0x00000000)
+[*] SMRR range: 0x0000000000000000 - 0x00000000FFFFFFFF (size = 0x100000000)
+
+[*] checking TSEG range configuration..
+[91m[-] TSEG range doesn't cover entire SMRAM[0m
+[91m[-] FAILED: TSEG is not properly configured. Portions of SMRAM may be vulnerable to DMA attacks[0m
+
+[*] running module: chipsec.modules.remap
+[*] Module path: /usr/local/lib/python2.7/dist-packages/chipsec/modules/remap.pyc
+Skipping module chipsec.modules.remap since it is not supported in this platform
+
+[CHIPSEC] ***************************  SUMMARY  ***************************
+[CHIPSEC] Time elapsed          0.033
+[CHIPSEC] Modules total         17
+[CHIPSEC] Modules failed to run 0:
+[CHIPSEC] Modules passed        3:
+[92m[+] PASSED: chipsec.modules.common.ia32cfg[0m
+[92m[+] PASSED: chipsec.modules.common.bios_smi[0m
+[92m[+] PASSED: chipsec.modules.common.spi_desc[0m
+[CHIPSEC] Modules failed        5:
+[91m[-] FAILED: chipsec.modules.common.spi_fdopss[0m
+[91m[-] FAILED: chipsec.modules.common.bios_wp[0m
+[91m[-] FAILED: chipsec.modules.common.spi_lock[0m
+[91m[-] FAILED: chipsec.modules.common.bios_ts[0m
+[91m[-] FAILED: chipsec.modules.smm_dma[0m
+[CHIPSEC] Modules with warnings 1:
+[93m[!] WARNING: chipsec.modules.common.bios_kbrd_buffer[0m
+[CHIPSEC] Modules skipped 8:
+[93m[*] SKIPPED: chipsec.modules.common.rtclock[0m
+[93m[*] SKIPPED: chipsec.modules.common.smrr[0m
+[93m[*] SKIPPED: chipsec.modules.common.smm[0m
+[93m[*] SKIPPED: chipsec.modules.common.uefi.s3bootscript[0m
+[93m[*] SKIPPED: chipsec.modules.common.uefi.access_uefispec[0m
+[93m[*] SKIPPED: chipsec.modules.common.secureboot.variables[0m
+[93m[*] SKIPPED: chipsec.modules.memconfig[0m
+[93m[*] SKIPPED: chipsec.modules.remap[0m
+[CHIPSEC] *****************************************************************

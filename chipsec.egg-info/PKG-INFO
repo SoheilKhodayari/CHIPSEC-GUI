@@ -1,0 +1,37 @@
+Metadata-Version: 1.1
+Name: chipsec
+Version: 1.2.5
+Summary: CHIPSEC: Platform Security Assessment Framework
+Home-page: https://github.com/chipsec/chipsec
+Author: CHIPSEC Team
+Author-email: chipsec@intel.com
+License: GNU General Public License v2 (GPLv2)
+Download-URL: https://github.com/chipsec/chipsec
+Description: CHIPSEC: Platform Security Assessment Framework
+        ===============================================
+        
+        
+        CHIPSEC is a framework for analyzing the security of PC platforms including hardware, system firmware (BIOS/UEFI), and platform components. It includes a security test suite, tools for accessing various low level interfaces, and forensic capabilities. It can be run on Windows, Linux, Mac OS X and UEFI shell. Instructions for installing and using CHIPSEC can be found in the manual (chipsec-manual.pdf).
+        
+        NOTE: This software is for security testing purposes. Use at your own risk. Read chipsec/WARNING.txt before using.
+        
+        Questions? Enter a new issue labeled as question, or e-mail chipsec@intel.com.
+        
+        First version of CHIPSEC was released in March 2014:
+        Announcement at CanSecWest 2014: https://cansecwest.com/slides/2014/Platform%20Firmware%20Security%20Assessment%20wCHIPSEC-csw14-final.pdf and first public release!
+        
+        Follow us on: https://twitter.com/CHIPSEC
+        
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Natural Language :: English
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Hardware

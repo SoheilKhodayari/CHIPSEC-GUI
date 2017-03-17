@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<testsuites>
+	<testsuite errors="1" failures="0" name="6b665536-cf49-4201-9d0f-d66a7d431bb1" skipped="0" tests="1" time="0.00001">
+		<properties>
+			<property name="OS" value="Linux 4.4.0-66-generic #87-Ubuntu SMP Fri Mar 3 15:29:05 UTC 2017 x86_64"/>
+			<property name="Platform" value="UnknownPlatform, VID: 8086, DID: 7190"/>
+			<property name="CHIPSEC" value="1.2.5"/>
+		</properties>
+		<testcase classname="chipsec.modules.rtclock" name="chipsec.modules.rtclock" time="0.00001">
+			<error message="Exception occurred during chipsec.modules.rtclock.run(): 'No module named rtclock'" type="error"/>
+			<system-out>ERROR: Exception occurred during import of chipsec.modules.rtclock: 'No module named rtclock'
+ERROR: Exception occurred during chipsec.modules.rtclock.run(): 'No module named rtclock'
+</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

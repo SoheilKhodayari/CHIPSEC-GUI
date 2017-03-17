@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<testsuites>
+	<testsuite errors="0" failures="4" name="d7270e42-0197-42db-9f9e-42a817f6a5ce" skipped="4" tests="14" time="0.01273">
+		<properties>
+			<property name="OS" value="Linux 4.4.0-66-generic #87-Ubuntu SMP Fri Mar 3 15:29:05 UTC 2017 x86_64"/>
+			<property name="Platform" value="UnknownPlatform, VID: 8086, DID: 7190"/>
+			<property name="CHIPSEC" value="1.2.5"/>
+		</properties>
+		<testcase classname="chipsec.modules.common.spi_fdopss" name="SPI Flash Descriptor Security Override Pin-Strap" time="0.00055">
+			<failure message="SPI Flash Descriptor Security Override is enabled" type="failure"/>
+			<system-out>[*] HSFS = 0x56E9 &lt;&lt; Hardware Sequencing Flash Status Register (SPIBAR + 0x4)
+    [00] FDONE            = 1 &lt;&lt; Flash Cycle Done 
+    [01] FCERR            = 0 &lt;&lt; Flash Cycle Error 
+    [02] AEL              = 0 &lt;&lt; Access Error Log 
+    [03] BERASE           = 1 &lt;&lt; Block/Sector Erase Size 
+    [05] SCIP             = 1 &lt;&lt; SPI cycle in progress 
+    [13] FDOPSS           = 0 &lt;&lt; Flash Descriptor Override Pin-Strap Status 
+    [14] FDV              = 1 &lt;&lt; Flash Descriptor Valid 
+    [15] FLOCKDN          = 0 &lt;&lt; Flash Configuration Lock-Down 
+[-] FAILED: SPI Flash Descriptor Security Override is enabled
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.ia32cfg" name="IA32 Feature Control Lock" time="0.00614">
+			<pass type="pass"/>
+			<system-out>[*] Verifying IA32_Feature_Control MSR is locked on all logical CPUs..
+[*] cpu0: IA32_Feature_Control Lock = 1
+[*] cpu1: IA32_Feature_Control Lock = 1
+[*] cpu2: IA32_Feature_Control Lock = 1
+[*] cpu3: IA32_Feature_Control Lock = 1
+[+] PASSED: IA32_FEATURE_CONTROL MSR is locked on all logical CPUs
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.bios_wp" name="BIOS Region Write Protection" time="0.00229">
+			<failure message="BIOS is NOT protected completely" type="failure"/>
+			<system-out>[*] BC = 0xFF &lt;&lt; BIOS Control (b:d.f 00:31.0 + 0xDC)
+    [00] BIOSWE           = 1 &lt;&lt; BIOS Write Enable 
+    [01] BLE              = 1 &lt;&lt; BIOS Lock Enable 
+    [02] SRC              = 3 &lt;&lt; SPI Read Configuration 
+    [04] TSS              = 1 &lt;&lt; Top Swap Status 
+    [05] SMM_BWP          = 1 &lt;&lt; SMM BIOS Write Protection 
+[-] BIOS region write protection is disabled!
+
+[*] BIOS Region: Base = 0x008FD000, Limit = 0x004E9FFF
+SPI Protected Ranges
+------------------------------------------------------------
+PRx (offset) | Value    | Base     | Limit    | WP? | RP?
+------------------------------------------------------------
+PR0 (74)     | 1175E938 | 00938000 | 01175FFF | 0   | 1 
+PR1 (78)     | 80BBD7B0 | 017B0000 | 000BBFFF | 1   | 1 
+PR2 (7C)     | FFBCE9F8 | 009F8000 | 01FBCFFF | 1   | 1 
+PR3 (80)     | BB80CC80 | 00C80000 | 01B80FFF | 1   | 1 
+PR4 (84)     | B6E9F889 | 01889000 | 016E9FFF | 1   | 1 
+
+[!] None of the SPI protected ranges write-protect BIOS region
+
+[!] BIOS should enable all available SMM based write protection mechanisms or configure SPI protected ranges to protect the entire BIOS region
+[-] FAILED: BIOS is NOT protected completely
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.smrr" name="CPU SMM Cache Poisoning / System Management Range Registers" time="0.00050">
+			<skipped message="CPU does not support SMRR range protection of SMRAM" type="skipped"/>
+			<system-out>[!] CPU does not support SMRR range protection of SMRAM
+[*] SKIPPED: CPU does not support SMRR range protection of SMRAM
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.bios_smi" name="SMI Events Configuration" time="0.00083">
+			<pass type="pass"/>
+			<system-out>[+] SMM BIOS region write protection is enabled (SMM_BWP is used)
+
+[*] Checking SMI enables..
+    Global SMI enable: 1
+    TCO SMI enable   : 1
+[+] All required SMI events are enabled
+
+[*] Checking SMI configuration locks..
+[+] TCO SMI configuration is locked (TCO SMI Lock)
+[+] SMI events global configuration is locked (SMI Lock)
+
+[+] PASSED: All required SMI sources seem to be enabled and locked
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.spi_lock" name="SPI Flash Controller Configuration Lock" time="0.00024">
+			<failure message="SPI Flash Controller configuration is not locked" type="failure"/>
+			<system-out>[*] HSFS = 0x56E9 &lt;&lt; Hardware Sequencing Flash Status Register (SPIBAR + 0x4)
+    [00] FDONE            = 1 &lt;&lt; Flash Cycle Done 
+    [01] FCERR            = 0 &lt;&lt; Flash Cycle Error 
+    [02] AEL              = 0 &lt;&lt; Access Error Log 
+    [03] BERASE           = 1 &lt;&lt; Block/Sector Erase Size 
+    [05] SCIP             = 1 &lt;&lt; SPI cycle in progress 
+    [13] FDOPSS           = 0 &lt;&lt; Flash Descriptor Override Pin-Strap Status 
+    [14] FDV              = 1 &lt;&lt; Flash Descriptor Valid 
+    [15] FLOCKDN          = 0 &lt;&lt; Flash Configuration Lock-Down 
+[-] FAILED: SPI Flash Controller configuration is not locked
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.smm" name="Compatible SMM memory (SMRAM) Protection" time="0.00014">
+			<pass type="pass"/>
+			<system-out>[*] PCI0.0.0_SMRAMC = 0x00 &lt;&lt; System Management RAM Control (b:d.f 00:00.0 + 0x88)
+    [00] C_BASE_SEG       = 0 &lt;&lt; SMRAM Base Segment = 010b 
+    [03] G_SMRAME         = 0 &lt;&lt; SMRAM Enabled 
+    [04] D_LCK            = 0 &lt;&lt; SMRAM Locked 
+    [05] D_CLS            = 0 &lt;&lt; SMRAM Closed 
+    [06] D_OPEN           = 0 &lt;&lt; SMRAM Open 
+[*] Compatible SMRAM is not enabled. Skipping..
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.bios_kbrd_buffer" name="Pre-boot Passwords in the BIOS Keyboard Buffer" time="0.00053">
+			<pass type="pass"/>
+			<system-out>[*] Keyboard buffer head pointer = 0x30 (at 0x41A), tail pointer = 0x30 (at 0x41C)
+[*] Keyboard buffer contents (at 0x41E):
+e0 50 0d 1c e0 50 e0 50 e0 50 e0 50 e0 50 e0 50 |  P   P P P P P P
+0d 1c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |                 
+[-] Keyboard buffer tail points inside the buffer (= 0x30)
+    It may potentially expose lengths of pre-boot passwords. Was your password 10 characters long?
+[*] Checking contents of the keyboard buffer..
+
+[!] WARNING: Keyboard buffer is not empty. The test cannot determine conclusively if it contains pre-boot passwords.
+    The contents might have not been cleared by pre-boot firmware or overwritten with garbage.
+    Visually inspect the contents of keyboard buffer for pre-boot passwords (BIOS, HDD, full-disk encryption).
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.spi_desc" name="SPI Flash Region Access Control" time="0.00042">
+			<pass type="pass"/>
+			<system-out>[*] FRAP = 0xE9F856BB &lt;&lt; SPI Flash Regions Access Permissions Register (SPIBAR + 0x50)
+    [00] BRRA             = BB &lt;&lt; BIOS Region Read Access 
+    [08] BRWA             = 56 &lt;&lt; BIOS Region Write Access 
+    [16] BMRAG            = F8 &lt;&lt; BIOS Master Read Access Grant 
+    [24] BMWAG            = E9 &lt;&lt; BIOS Master Write Access Grant 
+[*] Software access to SPI flash regions: read = 0xBB, write = 0x56
+
+[+] PASSED: SPI flash permissions prevent SW from writing to flash descriptor
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.bios_ts" name="BIOS Interface Lock (including Top Swap Mode)" time="0.00045">
+			<failure message="BIOS Interface is not locked (including Top Swap Mode)" type="failure"/>
+			<system-out>[*] BiosInterfaceLockDown (BILD) control = 0
+[*] BIOS Top Swap mode is enabled (TSS = 1)
+[*] RTC TopSwap control (TS) = 1
+[-] FAILED: BIOS Interface is not locked (including Top Swap Mode)
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.uefi.s3bootscript" name="chipsec.modules.common.uefi.s3bootscript" time="0.00001">
+			<skipped message="OS does not support UEFI Runtime API" type="skipped"/>
+			<system-out>[*] SKIPPED: OS does not support UEFI Runtime API
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.uefi.access_uefispec" name="chipsec.modules.common.uefi.access_uefispec" time="0.00001">
+			<skipped message="OS does not support UEFI Runtime API" type="skipped"/>
+			<system-out>[*] SKIPPED: OS does not support UEFI Runtime API
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.common.secureboot.variables" name="chipsec.modules.common.secureboot.variables" time="0.00001">
+			<skipped message="OS does not support UEFI Runtime API" type="skipped"/>
+			<system-out>[*] SKIPPED: OS does not support UEFI Runtime API
+</system-out>
+		</testcase>
+		<testcase classname="chipsec.modules.smm_dma" name="SMM TSEG Range Configuration Check" time="0.00062">
+			<pass type="pass"/>
+			<system-out>[*] TSEG      : 0x0000000000000000 - 0x-000000000000001 (size = 0x00000000)
+[*] SMRR is not supported
+
+[*] checking TSEG range configuration..
+[!] WARNING: TSEG is properly configured but can't determine if it covers entire SMRAM
+</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>
