@@ -22,7 +22,7 @@ class Main(QtGui.QMainWindow):
     def _initUI(self):
 
         self.center()
-        self.setWindowTitle('Testing')
+        self.setWindowTitle('Platform Security Assessment Framework')
 
         mainLayout = QVBoxLayout()
 

@@ -622,7 +622,7 @@ class mainWindow(QtGui.QWidget):
 		else:
 			self.parent.console.runCommand(cmd, False)
 
-		self.parent._writeOutputInSecondTerminal("++[Summary Generation In Process] Please wait ...\n\n")
+		self.parent._writeOutputInSecondTerminal("++[Summary Generation In Progress] Please wait ...\n\n")
 		
 
 	def _open_browse_select_other_test(self):
