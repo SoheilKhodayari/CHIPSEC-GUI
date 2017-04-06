@@ -1,3 +1,20 @@
+
+
+===========fix for sudo password prompt on ubuntu live versions
+This will force sudo to act as nomral i.e. like normal versions
+
+In the live environment the ubuntu user has passwordless sudo access, because that is the purpose of the live environment.
+
+In the above case the passwordless sudo access is defined in /etc/sudoers.d/casper:
+
+ubuntu  ALL=(ALL) NOPASSWD: ALL   -->> change to --->> ubuntu  ALL=(ALL) ALL
+
+this will force it to ask for passwords
+
+
+
+
+
 ===========fix for not finding packages on live ubuntu versions
 Open Software Sources (or Software & Updates in 13.04+) by searching for it in the Dash.
 Open the "Ubuntu Software" tab.
