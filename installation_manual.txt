@@ -1,3 +1,23 @@
+===========password issues on live versions
+
+# add sudo user
+adduser <username> sudo
+
+
+# change another user password
+sudo su
+passwd <username>
+
+# change root password
+sudo passwd
+
+# change current user password
+passwd
+
+=================make zsh to start on terminator startup
+
+chsh -s $(which zsh)   # IMPORTANT ATTENTION: do it when you are not on a sudo, otherwise it wont work
+
 ==========Arbitary installs ================================
 
 sudo apt-get install vim
