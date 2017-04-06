@@ -1,3 +1,14 @@
+
+===========fix for not finding packages on live ubuntu versions
+Open Software Sources (or Software & Updates in 13.04+) by searching for it in the Dash.
+Open the "Ubuntu Software" tab.
+Ensure that the first 4 check boxes on this tab are enabled
+
+Update the package lists, then test with these commands:
+sudo apt-get update
+sudo apt-get install <TEST_PACKAGE>
+
+
 ===========password issues on live versions
 
 # add sudo user
