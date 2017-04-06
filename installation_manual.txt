@@ -1,5 +1,4 @@
 
-
 ===========fix for sudo password prompt on ubuntu live versions
 This will force sudo to act as nomral i.e. like normal versions
 
@@ -118,6 +117,7 @@ tmux source-file ~/.tmux.conf   # get out of zsh when doing this,if you have zsh
 set -g mouse on
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
+set-option -g default-shell /bin/zsh
 
 ######################
 ### DESIGN CHANGES ###
