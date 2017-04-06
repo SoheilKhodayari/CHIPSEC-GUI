@@ -1,3 +1,9 @@
+===========arbitary
+make runnable script by double click
+
+gsettings set org.gnome.nautilus.preferences executable-text-activation ask
+
+
 
 ===========fix for sudo password prompt on ubuntu live versions
 This will force sudo to act as nomral i.e. like normal versions
