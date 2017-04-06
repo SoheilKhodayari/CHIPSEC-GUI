@@ -1,15 +1,51 @@
+==========Arbitary installs ================================
+
+sudo apt-get install vim
+sudo apt-get install zsh
+sudo apt-get install terminator
+sudo apt-get install curl
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
-========== AFTER CHIPSEC INSTALLATION, DO:
 
+====================Install PIP ============================
+
+Method 1) 
 # install python pip
 sudo apt-get install python-pip
 
 # verify installation with
 pip -V
 
+
+Method 2) if method 1 fails, try:
+
+cd ~
+wget -P Downloads/ https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py
+sudo python Downloads/distribute_setup.py
+which easy_install  # shows /usr/local/bin/easy_install
+sudo easy_install pip
+which pip  # shows /usr/local/bin/pip
+
+================chipsec installation ============================
+
+
+apt-get install build-essential python-dev python gcc \
+linux-headers-$(uname -r) nasm
+
+pip install setuptools
+
+pip install chipsec
+
+========== AFTER CHIPSEC INSTALLATION, DO:
+
+
+
 # install pyqt4
 sudo apt-get install python-qt4
+
+# extra python modules
+pip install pexpect
 
 # install tmux
 sudo apt-get update
