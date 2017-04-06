@@ -37,6 +37,10 @@ pip install setuptools
 
 pip install chipsec
 
+# cd to chipsec package dir and do:
+python setup.py build_ext -i
+sudo python chipsec_main.py
+
 ========== AFTER CHIPSEC INSTALLATION, DO:
 
 
