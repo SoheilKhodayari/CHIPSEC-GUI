@@ -16,6 +16,10 @@ REPORT_PATH = BASE_PATH + RELATIVE_REPORTS_FOLDER
 #						Test Names And Explanations
 # ----------------------------------------------------------------------------- #
 
+
+# @Note: tests are fetched automatically from the modules/common directory.
+# to use below dictionary instead, pass true to _fetch_test_suite_list() function.
+# below dictionary is not used by default
 AVAILABLE_TESTS = ['bios_kbrd_buffer','bios_smi','bios_ts',
 'bios_wp','ia32cfg','rtclock','smm','smrr','spi_desc','spi_fdopss','spi_lock']
 
@@ -31,9 +35,6 @@ TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'spi_fdopss': 'msg10',
 				'spi_lock':'msg11'}
 
-ADDITIONAL_TEST_USAGE_MESSAGE = "You can select and run your own tests."
-ADDITIONAL_TEST_I_SHORT_MSG = "This test will NOT be executed when selecting ALL other pre-defined tests."
-ADDITIONAL_TEST_I_LONG_MSG = "Test Format is Intel's Chipsec Format, see github.com/chipsec/chipsec for more!"
 
 DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'bios_smi': 'msg2',
@@ -46,6 +47,12 @@ DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'spi_desc': 'msg9',
 				'spi_fdopss': 'msg10',
 				'spi_lock':'msg11'}
+
+
+ADDITIONAL_TEST_USAGE_MESSAGE = "You can select and run your own tests."
+ADDITIONAL_TEST_I_SHORT_MSG = "This test will NOT be executed when selecting ALL other pre-defined tests."
+ADDITIONAL_TEST_I_LONG_MSG = "Test Format is Intel's Chipsec Format, see github.com/chipsec/chipsec for more!"
+
 
 
 # ----------------------------------------------------------------------------- #

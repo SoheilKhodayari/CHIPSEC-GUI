@@ -561,7 +561,6 @@ class mainWindow(QtGui.QWidget):
 			self._show_error_dialog("Test(s) not Specified                   ","It is required to choose your desired test(s) first!","")
 			return None
 		elif module_name == "<< OTHER TEST >>":
-			# TO DO: copy file into common dir, and pass its name, pass for now
 			abspath = str(self._other_test_browse_le.text())
 			slash_index = abspath.rindex('/')
 			path = abspath[:slash_index]
@@ -622,7 +621,7 @@ class mainWindow(QtGui.QWidget):
 		else:
 			self.parent.console.runCommand(cmd, False)
 
-		self.parent._writeOutputInSecondTerminal("++[Summary Generation In Progress] Please wait ...\n\n")
+		self.parent._writeOutputInSecondTerminal("\n++[Summary Generation In Progress] Please wait ...\n\n")
 		
 
 	def _open_browse_select_other_test(self):
