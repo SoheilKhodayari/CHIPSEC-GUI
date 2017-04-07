@@ -12,12 +12,14 @@ from utils import _sudo_exec, _makeFile
 
 class Main(QtGui.QMainWindow):
 
-    def __init__(self):
+    def __init__(self, appModel):
         super(Main, self).__init__()
         self.setMinimumWidth(1200)
         self.setMinimumHeight(600)
+        # appModel is "py" or "pyc", fetched from argv
+        # this will determine how to treat other python file extentions
+        self.appModel = appModel  
         self._initUI()
-
 
     def _initUI(self):
 
@@ -63,6 +65,8 @@ class Main(QtGui.QMainWindow):
 
         self._writeOutputInSecondTerminal("[Chipsec] >\n")
 
+    def get_app_model(self):
+        return self.appModel
 
     def closeEvent(self, event):
 
@@ -134,19 +138,24 @@ class Main(QtGui.QMainWindow):
 
 
 
-def main():
+def main(argv=None):
+    
     #QtGui.QApplication.setStyle(QtGui.QStyleFactory.create('SGI'))
     QtGui.QApplication.setStyle(QtGui.QStyleFactory.create('CleanLooks'))
     app = QtGui.QApplication(sys.argv)
     app.setWindowIcon(QtGui.QIcon('icons/cr2.png'))
 
-    ex = Main()
+    if (argv is not None) and (len(argv)!=0):
+        appModel = argv[0]
+    else:
+        appModel = "py"
+    ex = Main(appModel)
     ex.show()
     
     sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
 
 

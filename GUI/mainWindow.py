@@ -130,8 +130,12 @@ class mainWindow(QtGui.QWidget):
 		modules_dir = "../chipsec/modules/common"
 		results = []
 		for file in os.listdir(modules_dir):
-			if (file.endswith(".py")) and (file != "__init__.py"):
-				results.append(file[:-3])
+			if self.parent.get_app_model() == "pyc":
+				if (file.endswith(".pyc")) and (file != "__init__.pyc"):
+					results.append(file[:-4])
+			else:
+				if (file.endswith(".py")) and (file != "__init__.py"):
+					results.append(file[:-3])		
 		self._test_suite = results
 		return results
 
@@ -596,7 +600,10 @@ class mainWindow(QtGui.QWidget):
 
 
 		# --- build the cmd from switch_dict---------------------------------------
-		sudo_cmd_base = "sudo python ../gui_api.py"
+		if self.parent.get_app_model() == "pyc":
+			sudo_cmd_base = "sudo python ../gui_api.pyc"
+		else:
+			sudo_cmd_base = "sudo python ../gui_api.py"
 		for key in switch_dict:
 			if switch_dict[key]!="":
 				sudo_cmd_base += " {0} {1}".format(key,switch_dict[key])
