@@ -4,10 +4,13 @@
 
 import sys
 import os
+import csv
 import uuid, time
+import xlwt  # sudo pip install xlwt
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import QtGui,QtCore
+from PyQt4.QtCore import Qt
 from utils import _sudo_exec 
 from local_settings import AVAILABLE_TESTS, TEST_TOOL_TIPS,DETAILED_TEST_TOOL_TIPS
 from local_settings import VERBOSE_MODE_SHORT_MSG, VERBOSE_MODE_LONG_MSG, \
@@ -17,7 +20,10 @@ from local_settings import VERBOSE_MODE_SHORT_MSG, VERBOSE_MODE_LONG_MSG, \
 						   IGNORE_PLATFORM_MODE_SHORT_MSG, IGNORE_PLATFORM_MODE_LONG_MSG, \
 						   NODRIVER_MODE_SHORT_MSG, NODRIVER_MODE_LONG_MSG, \
 						   ADDITIONAL_TEST_I_SHORT_MSG, ADDITIONAL_TEST_I_LONG_MSG, \
-						   ADDITIONAL_TEST_USAGE_MESSAGE, REPORT_PATH, ROOT_PASSWORD
+						   ADDITIONAL_TEST_USAGE_MESSAGE, REPORT_PATH, ROOT_PASSWORD, \
+						   BASE_PATH
+
+from categoryWorker import *
 
 
 lib_path = os.path.abspath(os.path.join('../chipsec'))
@@ -81,6 +87,7 @@ class mainWindow(QtGui.QWidget):
 
 		super(mainWindow, self).__init__()
 		self.parent = parent
+		self.test_summary_widget = None
 
 		# -- specify test options for the chipsec
 		self._test_options_dict = {}
@@ -598,20 +605,31 @@ class mainWindow(QtGui.QWidget):
 			output_save_path = save_dir + "/" + str(uuid.uuid4()) + report_extention
 			switch_dict['-x'] = output_save_path
 
+		# --- create absoulute path for category table output
+		abs_base_dir = BASE_PATH
+		index = abs_base_dir.rindex('/')
+		abs_path_chipsec = abs_base_dir[:index]
+
 
 		# --- build the cmd from switch_dict---------------------------------------
 		if self.parent.get_app_model() == "pyc":
 			sudo_cmd_base = "sudo python ../gui_api.pyc"
+			sudo_cmd_category = "sudo python {0}/gui_api.pyc".format(abs_path_chipsec)
 		else:
 			sudo_cmd_base = "sudo python ../gui_api.py"
+			sudo_cmd_category = "sudo python {0}/gui_api.py".format(abs_path_chipsec)
 		for key in switch_dict:
 			if switch_dict[key]!="":
-				sudo_cmd_base += " {0} {1}".format(key,switch_dict[key])
+				tmp = " {0} {1}".format(key,switch_dict[key])
+				sudo_cmd_base += tmp
+				sudo_cmd_category += tmp
 			else:
-				sudo_cmd_base += " {0}".format(key)
+				temp = " {0}".format(key)
+				sudo_cmd_base += temp
+				sudo_cmd_category += temp
 
 
-		return sudo_cmd_base
+		return [sudo_cmd_base,sudo_cmd_category]
 
 
 	# ---------------------------------------------------------------------------------#
@@ -622,11 +640,16 @@ class mainWindow(QtGui.QWidget):
 		cmd = self.generate_chipsec_run_command()
 		if cmd == None:
 			return None
+
+		cmd_tmux = cmd[0]
+		cmd_cat = cmd[1]
+		self._generate_categorize_output_main(cmd_cat)
+
 		if self._first_run_done == False:
 			self._first_run_done = True
-			self.parent.console.runCommand(cmd, True)
+			self.parent.console.runCommand(cmd_tmux, True)
 		else:
-			self.parent.console.runCommand(cmd, False)
+			self.parent.console.runCommand(cmd_tmux, False)
 
 		self.parent._writeOutputInSecondTerminal("\n++[Summary Generation In Progress] Please wait ...\n\n")
 		
@@ -710,6 +733,125 @@ class mainWindow(QtGui.QWidget):
 			row.checkBox.blockSignals(False)
 
 
+	# ---------------------------------------------------------------------------------#
+	#							CATEGORY OUTPUT
+	# ---------------------------------------------------------------------------------#
+	
+	def _generate_categorize_output_main(self, command):
+  		thread = PythonThread(command)
+  		self.connect(thread, SIGNAL("finished()"), lambda th=thread : self._on_thread_task_finished(th))
+  		thread.start()
+
+  	def _on_thread_task_finished(self, thread):
+  		self.test_summary_widget =  QtGui.QDialog(self)
+  		self.test_summary_widget.setMinimumWidth(1000)
+  		self.test_summary_widget.setMinimumHeight(600)
 
 
+		table = categoryTable(thread.outputData)
 
+  		QH = QHBoxLayout()
+  		QH.addWidget(table)
+  		self.test_summary_widget.setLayout(QH)
+
+
+  		# -- top bar panel
+		iconExit = QtGui.QIcon('icons/exit.png')
+		exitAction = QtGui.QAction(iconExit, '&Exit', self)
+		exitAction.setShortcut('Ctrl+Q')
+		exitAction.setStatusTip('Exit application')
+		exitAction.triggered.connect(self.test_summary_widget.close)
+
+		iconSave = QtGui.QIcon('icons/borrow.jpg')
+		saveAction = QtGui.QAction(iconSave, '&Save', self)
+		saveAction.setShortcut('Ctrl+S')
+		saveAction.setStatusTip('Save Output')
+		saveAction.triggered.connect(lambda celf, tb=table, wi=self.test_summary_widget: self._on_save_test_category_output(tb,wi))
+
+		iconScreen = QtGui.QIcon('icons/borrow.jpg')
+		shotAction = QtGui.QAction(iconScreen, '&ScreenShot', self)
+		shotAction.setShortcut('Ctrl+P')
+		shotAction.setStatusTip('Take ScreenShot')
+		shotAction.triggered.connect(lambda celf, tb=table, wi=self.test_summary_widget: self._on_capture_screenshot(tb,wi))
+
+		menubar = QtGui.QMenuBar(self)
+		menubar.setGeometry(QtCore.QRect(0, 0, 2000, 23))
+		menufile = menubar.addMenu('File')
+
+		menufile.addAction(saveAction)
+		menufile.addAction(shotAction)
+		menufile.addAction(exitAction)
+		self.test_summary_widget.layout().setMenuBar(menubar)
+  		# -- end top bar panel
+
+  		self.test_summary_widget.exec_() #or self.test_summary_widget.show()
+  		
+
+	def _on_save_test_category_output(self, categoryTable, mainWidget):
+		filename = unicode(QtGui.QFileDialog.getSaveFileName(self, 'Save File', '', ".xls(*.xls)"))    
+		wbk = xlwt.Workbook()
+		sheet = wbk.add_sheet("sheet", cell_overwrite_ok=True)
+
+		for currentColumn in range(categoryTable.cols):
+		    for currentRow in range(categoryTable.rows):
+		        try:
+					teext = str(categoryTable.item(currentRow, currentColumn).text())
+					teext.strip()
+					if teext == "YELLOW":
+						style = xlwt.XFStyle()
+						pattern = xlwt.Pattern()
+						pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+						pattern.pattern_fore_colour = xlwt.Style.colour_map['light_yellow']
+						style.pattern = pattern
+						sheet.write(currentRow, currentColumn, teext, style)
+					elif teext == "RED":
+						style = xlwt.XFStyle()
+						pattern = xlwt.Pattern()
+						pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+						pattern.pattern_fore_colour = xlwt.Style.colour_map['red']
+						style.pattern = pattern
+						sheet.write(currentRow, currentColumn, teext, style)
+					elif teext == "GREEN":
+						style = xlwt.XFStyle()
+						pattern = xlwt.Pattern()
+						pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+						pattern.pattern_fore_colour = xlwt.Style.colour_map['green']
+						style.pattern = pattern
+						sheet.write(currentRow, currentColumn, teext, style)
+					elif teext == "ORANGE":
+						style = xlwt.XFStyle()
+						pattern = xlwt.Pattern()
+						pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+						pattern.pattern_fore_colour = xlwt.Style.colour_map['orange']
+						style.pattern = pattern
+						sheet.write(currentRow, currentColumn, teext, style)
+					elif teext == "ORANGE_LIGHT":
+						style = xlwt.XFStyle()
+						pattern = xlwt.Pattern()
+						pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+						pattern.pattern_fore_colour = xlwt.Style.colour_map['gold']
+						style.pattern = pattern
+						sheet.write(currentRow, currentColumn, teext, style)
+					else:
+						sheet.write(currentRow, currentColumn, teext)			        	
+		        except AttributeError:
+		            pass
+		wbk.save(filename+".xls")
+
+	def _on_capture_screenshot(self, table, pWdidget):
+	    path = QtGui.QFileDialog.getSaveFileName(
+	            self, 'Save File', '', 'JPG(*.jpg)')
+	    if not path.isEmpty():
+	    	width = pWdidget.width()
+	    	height = pWdidget.height()
+	    	pWdidget.showMaximized()
+	    	time.sleep(1)
+	    	p = QtGui.QPixmap.grabWindow(table.winId())
+	    	p.save(path, 'jpg')
+	    	pWdidget.resize(width, height)
+
+
+		
+
+
+    

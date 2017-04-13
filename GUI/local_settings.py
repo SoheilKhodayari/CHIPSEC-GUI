@@ -12,6 +12,15 @@ RELATIVE_REPORTS_FOLDER = "/reports"
 REPORT_PATH = BASE_PATH + RELATIVE_REPORTS_FOLDER
 
 
+
+# ----------------------------------------------------------------------------- #
+#						APP MSG, ERRORS, ETC
+# ----------------------------------------------------------------------------- #
+
+# When user requests the test summary window from the top bar and the window
+# is not yet available (no test has runned)
+SHOW_TEST_SUMMARY_REQUEST_ERROR_TITLE = "Unauthorized Action"
+SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG = "No Test Summary Exists Yet!"
 # ----------------------------------------------------------------------------- #
 #						Test Names And Explanations
 # ----------------------------------------------------------------------------- #
@@ -85,8 +94,13 @@ NODRIVER_MODE_LONG_MSG = "Equivalant to -n --no_driver commandline!"
 
 
 
+# ----------------------------------------------------------------------------- #
+#						Test Category Messages
+# ----------------------------------------------------------------------------- #
 
-
-
-
-
+FLOCKDN_COLOR_CODE = "RED"
+FLOCKDN_CRITICALITY = "HIGH"
+FLOCKDN_EXPECTED_RESULT = "1"
+FLOCKDN_DESCRIPTION = "FLOCKDN description goes here\ndescription goes here" # use \n for newlines!
+FLOCKDN_REPR = "FLOCKDN"
+FLOCKDN_TEST_NAME = "SPI Flash Controller Configuration Lock"

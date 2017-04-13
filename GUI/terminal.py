@@ -104,9 +104,23 @@ class embeddedTerminal(QWidget):
             idx = stderr.rindex("SUMMARY")
             msg = stderr[idx-5:-65]
         except:
-            msg = "\n[Error] SUMMARY NOT YET AVAILABLE! DO tmux capture-pane -pS -32768 TO SEE THE RESULT MANUALLY"
+            msg = "\n[Error] SUMMARY NOT YET AVAILABLE!\n This will happen if: \n\n (1) The specified tests have internal error(s) or \n (2) A very time-consuming/long output test was running .\n\nIf you want to know more, Here's what you can do:\n\n(1) check the rear terminal for errors/outputs!! \n(2) DO \"tmux capture-pane -pS -32768\" on terminal without quotes TO SEE THE RESULT MANUALLY"
         
         self.parent._writeOutputInSecondTerminal(msg)
+
+    # def _callback_tmux(self):
+    #     stderr = _sudo_exec("tmux capture-pane -pS -32768 -t {0}".format(self.uuid), ROOT_PASSWORD)
+    #     msg =""
+    #     try:
+    #         idx = stderr.rindex("sudo python")
+    #         msg = stderr[idx:]
+    #         lst = msg.split('\n')
+    #     except:
+    #         msg = ""
+    #         lst=[]
+    #     lst = str(lst)
+    #     # to do: loop over the list and do the editing 
+    #     self.parent._writeOutputInSecondTerminal(lst)
 
 
 

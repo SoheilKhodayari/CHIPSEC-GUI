@@ -94,23 +94,32 @@ class Main(QtGui.QMainWindow):
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(self.close)
 
-        # iconHelp = QtGui.QIcon('icons/qs_mark.png')
-        # helpAction = QtGui.QAction(iconHelp, '&Help', self)
-        # helpAction.setShortcut('Ctrl+H')
-        # helpAction.setStatusTip('Help')
-        # helpAction.triggered.connect(self._render_help_dialog)
+        iconTestSummary = QtGui.QIcon('icons/attach.png')
+        summaryAction = QtGui.QAction(iconTestSummary, '&Test Summary', self)
+        summaryAction.setShortcut('Ctrl+D')
+        summaryAction.setStatusTip('Test Summary Window')
+        summaryAction.triggered.connect(self._render_test_summary_window_now)
 
 
         menubar = QtGui.QMenuBar(self)
         menubar.setGeometry(QtCore.QRect(0, 0, 2000, 23))
         menufile = menubar.addMenu('File')
 
-        #menufile.addAction(helpAction)
+        menufile.addAction(summaryAction)
         menufile.addAction(exitAction)
 
 
+    def _render_test_summary_window_now(self):
+        if self.widget.test_summary_widget is not None:
+            self.widget.test_summary_widget.show()
+        else:
+            QtGui.QMessageBox.information(self, SHOW_TEST_SUMMARY_REQUEST_ERROR_TITLE, SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG)
+
     def _writeOutputInSecondTerminal(self, text):
-        self.termianlTextEdit.setText(str(self.termianlTextEdit.toPlainText()) + text )
+        self.termianlTextEdit.setText(str(text))
+
+    def appendOutputInSecondTerminal(self, text):
+        self.termianlTextEdit.setText(str(self.termianlTextEdit.toPlainText()) + text )       
 
     def runCommandInSecondTerminal(self, command= "sudo chipsec_main -i"):
 
