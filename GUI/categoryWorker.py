@@ -70,69 +70,124 @@ class PythonThread (QtCore.QThread):
         QtCore.QThread.start(self)
 
     def run(self):
-    	stderr = _sudo_exec(self.cmdline, ROOT_PASSWORD)
-    	stderrAsList = stderr.split('\r\n')
+		stderr = _sudo_exec(self.cmdline, ROOT_PASSWORD)
+		stderrAsList = stderr.split('\r\n')
 
 
-    	# test 1
-    	flockdn_res = self.FLOCKDN(stderrAsList)
+		# test 1
+		flockdn_res = self.FLOCKDN(stderrAsList)
 
-    	# test 2
-    	smm_bwp_2_res = self.SMM_BWP_2(stderrAsList)
-    	tco_smi_lock_res = self.TCO_SMI_LOCK(stderrAsList)
-    	smi_lock_res = self.SMI_LOCK(stderrAsList)
-    	global_smi_en_res = self.Global_SMI_EN(stderrAsList)
-    	tco1_cnt_en_res = self.TCO1_CNT(stderrAsList)
+		# test 2
+		smm_bwp_2_res = self.SMM_BWP_2(stderrAsList)
+		tco_smi_lock_res = self.TCO_SMI_LOCK(stderrAsList)
+		smi_lock_res = self.SMI_LOCK(stderrAsList)
+		global_smi_en_res = self.Global_SMI_EN(stderrAsList)
+		tco1_cnt_en_res = self.TCO1_CNT(stderrAsList)
 
-    	# test 3
-    	bios_keyboard_buff = self.BIOS_Keyboard_Buffer(stderrAsList)
+		# test 3
+		bios_keyboard_buff = self.BIOS_Keyboard_Buffer(stderrAsList)
 
-    	# test 4
-    	bioswe_res = self.BIOSWE(stderrAsList)
-    	ble_res = self.BLE(stderrAsList)
-    	src_res = self.SRC(stderrAsList)
-    	tss = self.TSS(stderrAsList)
-    	smm_bwp_res = self.SMM_BWP(stderrAsList)
+		# test 4
+		bioswe_res = self.BIOSWE(stderrAsList)
+		ble_res = self.BLE(stderrAsList)
+		src_res = self.SRC(stderrAsList)
+		tss = self.TSS(stderrAsList)
+		smm_bwp_res = self.SMM_BWP(stderrAsList)
 
-    	# test 5
-    	d_lck_res = self.D_LCK(stderrAsList)
+		# test 5
+		d_lck_res = self.D_LCK(stderrAsList)
 
-    	# test 6 = 
-    	rtc_ue_res = self.UE(stderrAsList)
-    	rtc_ll_res = self.LL(stderrAsList)
-    	rtc_ul_res = self.UL(stderrAsList)
+		# test 6 = 
+		rtc_ue_res = self.UE(stderrAsList)
+		rtc_ll_res = self.LL(stderrAsList)
+		rtc_ul_res = self.UL(stderrAsList)
 
-    	#test 7
-    	ia32_lock = self.Lock(stderrAsList)
+		#test 7
+		ia32_lock = self.Lock(stderrAsList)
 
-    	#test 8
-    	bbra_bbwa = self.BRRA_and_BRWA(stderrAsList)
+		#test 8
+		bbra_bbwa = self.BRRA_and_BRWA(stderrAsList)
 
-    	#test 9
-    	fdopss_res = self.FDOPSS(stderrAsList)
+		#test 9
+		fdopss_res = self.FDOPSS(stderrAsList)
+
+		#test 10
+		bild_res = self.BILD(stderrAsList)
+		tss_2_res = self.TSS_2(stderrAsList)
+
+		#test 11
+		smrr_range_base_res = self.Checking_SMRR_range_base_programming(stderrAsList)
+		smrr_range_mask_res = self.Checking_SMRR_range_mask_programming(stderrAsList)
+		smrr_same_on_logical_cpus = self.Verifying_SMRR_range_base_and_mask_are_same_on_all_logical_cpus(stderrAsList)
+		smrr_ia32_physbase_res = self.IA32_SMRR_PHYSBASE(stderrAsList)
+		smrr_protection_cache_res = self.SMRR_Protection_Cache_Attack(stderrAsList)
+
+		#test 12
+		remap_win_conf_res = self.Remap_window_configuration(stderrAsList)
+		touud_res = self.TOUUD(stderrAsList)
+		tolud_res = self.TOLUD(stderrAsList)
+
+		#test 13
+		bdsm_res = self.BDSM(stderrAsList)
+		bgsm_res = self.BGSM(stderrAsList)
+		ggc_res = self.GGC(stderrAsList)
+		dpr_res = self.DPR(stderrAsList)
+		mseg_mask_res = self.MESEG_MASK(stderrAsList)
+		pavpc_res = self.PAVPC(stderrAsList)
+		remapbase_res = self.REMAPBASE(stderrAsList)
+		remaplimit_res = self.REMAPLIMIT(stderrAsList)
+		tolud_2_res = self.TOLUD_2(stderrAsList)
+		tom_res = self.TOM(stderrAsList)
+		touud_2_res = self.TOUUD_2(stderrAsList)
+		tseg_mb_res = self.TSEGMB(stderrAsList)
 
 
-    	results = [flockdn_res,
-    	smm_bwp_2_res, 
-    	tco_smi_lock_res,
-    	smi_lock_res,
-    	global_smi_en_res,
-    	tco1_cnt_en_res,
-    	bios_keyboard_buff,
-    	bioswe_res,
-    	ble_res,
-    	src_res,
-    	tss,
-	   	smm_bwp_res,
-	   	d_lck_res,
-	   	rtc_ue_res,
-	   	rtc_ll_res,
-	   	rtc_ul_res,
-	   	ia32_lock,
-	   	bbra_bbwa,
-	   	fdopss_res
-	   	]
-    	self.outputData = results
+
+
+		results = [flockdn_res,
+		smm_bwp_2_res, 
+		tco_smi_lock_res,
+		smi_lock_res,
+		global_smi_en_res,
+		tco1_cnt_en_res,
+		bios_keyboard_buff,
+		bioswe_res,
+		ble_res,
+		src_res,
+		tss,
+		smm_bwp_res,
+		d_lck_res,
+		rtc_ue_res,
+		rtc_ll_res,
+		rtc_ul_res,
+		ia32_lock,
+		bbra_bbwa,
+		fdopss_res,
+		bild_res,
+		tss_2_res,
+		smrr_range_base_res,
+		smrr_range_mask_res,
+		smrr_same_on_logical_cpus,
+		smrr_ia32_physbase_res,
+		smrr_protection_cache_res,
+		remap_win_conf_res,
+		touud_res,
+		tolud_res,
+		bdsm_res,
+		bgsm_res,
+		ggc_res,
+		dpr_res,
+		mseg_mask_res,
+		pavpc_res,
+		remapbase_res,
+		remaplimit_res,
+		tolud_2_res,
+		tom_res,
+		touud_2_res,
+		tseg_mb_res
+		]
+
+		self.outputData = results
 
 
 # ----------------------------------------------------------------------------- #
@@ -639,82 +694,583 @@ class PythonThread (QtCore.QThread):
         return res
 
 
-    def BILD(self, stderr):
+
+# ----------------------------------------------------------------------------- #
+#				BIOS Interface Lock including Top Swap Mode
+# ----------------------------------------------------------------------------- #
+
+    def BILD(self, stderrList):
+    	"""
+			BIOS Interface Lock including Top Swap Mode
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "BiosInterfaceLockDown (BILD) control ="
+    	for line in stderrList:
+    		if phrase in line:
+    			try:
+	    			idx = line.index('=')
+	    			item = line[idx+2]
+	    			break
+	    		except:
+	    			item = 'UNKNOWN'
+
+    	res =   [BILD_COLOR_CODE,
+    		    BILD_CRITICALITY,
+    		    BILD_EXPECTED_RESULT,
+    		    item,
+    		    BILD_DESCRIPTION,
+    		    BILD_REPR,
+    		    BILD_TEST_NAME]
+        return res
+    def TSS_2(self, stderrList):
+    	"""
+			BIOS Interface Lock including Top Swap Mode
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "BIOS Top Swap mode is enabled (TSS = 1)"
+    	msg_failure = "BIOS Top Swap mode is disabled (TSS = 0)"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "1"
+    			break
+    		elif msg_failure in line:
+    			item = "0"
+    			break
+
+    	res =   [TSS_2_COLOR_CODE,
+    		    TSS_2_CRITICALITY,
+    		    TSS_2_EXPECTED_RESULT,
+    		    item,
+    		    TSS_2_DESCRIPTION,
+    		    TSS_2_REPR,
+    		    TSS_2_TEST_NAME]
+        return res
+
+# ----------------------------------------------------------------------------- #
+#							CPU SMM Cache Poisoning
+# ----------------------------------------------------------------------------- #
+
+
+    def Checking_SMRR_range_base_programming(self, stderrList):
+    	"""
+			For CPU SMM Cache Poisoning
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "OK so far. SMRR range base is programmed"
+    	msg_failure = "SMRR range base is not programmed"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "passed"
+    			break
+    		elif msg_failure in line:
+    			item = "failed"
+    			break
+
+    	res =   [SMRR_range_base_COLOR_CODE,
+    		    SMRR_range_base_CRITICALITY,
+    		    SMRR_range_base_EXPECTED_RESULT,
+    		    item,
+    		    SMRR_range_base_DESCRIPTION,
+    		    SMRR_range_base_REPR,
+    		    SMRR_range_base_TEST_NAME]
+        return res
+
+    def Checking_SMRR_range_mask_programming(self, stderrList):
+    	"""
+			For CPU SMM Cache Poisoning
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "OK so far. SMRR range is enabled"
+    	msg_failure = "SMRR range is not enabled"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "passed"
+    			break
+    		elif msg_failure in line:
+    			item = "failed"
+    			break
+
+    	res =   [SMRR_range_mask_COLOR_CODE,
+    		    SMRR_range_mask_CRITICALITY,
+    		    SMRR_range_mask_EXPECTED_RESULT,
+    		    item,
+    		    SMRR_range_mask_DESCRIPTION,
+    		    SMRR_range_mask_REPR,
+    		    SMRR_range_mask_TEST_NAME]
+        return res
+
+    def Verifying_SMRR_range_base_and_mask_are_same_on_all_logical_cpus(self, stderrList):
+    	"""
+			For CPU SMM Cache Poisoning
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "OK so far. SMRR range base/mask match on all logical CPUs"
+    	msg_failure = "SMRR range base/mask do not match on all logical CPUs"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "passed"
+    			break
+    		elif msg_failure in line:
+    			item = "failed"
+    			break
+
+    	res =   [SMRR_range_base_and_mask_are_same_COLOR_CODE,
+    		    SMRR_range_base_and_mask_are_same_CRITICALITY,
+    		    SMRR_range_base_and_mask_are_same_EXPECTED_RESULT,
+    		    item,
+    		    SMRR_range_base_and_mask_are_same_DESCRIPTION,
+    		    SMRR_range_base_and_mask_are_same_REPR,
+    		    SMRR_range_base_and_mask_are_same_TEST_NAME]
+        return res
+
+    def IA32_SMRR_PHYSBASE(self, stderrList):
+    	"""
+			For CPU SMM Cache Poisoning
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "IA32_SMRR_PHYSBASE = "
+    	for line in stderrList:
+    		if phrase in line:
+    			try:
+	    			idx_start = line.index(phrase) + len(phrase)
+	    			idx_end = line.index('<<')-1
+	    			item = line[idx_start:idx_end]
+	    			break
+	    		except:
+	    			item = "UNKNOWN"
+
+    	res =   [IA32_SMRR_PHYSBASE_COLOR_CODE,
+    		    IA32_SMRR_PHYSBASE_CRITICALITY,
+    		    IA32_SMRR_PHYSBASE_EXPECTED_RESULT,
+    		    item,
+    		    IA32_SMRR_PHYSBASE_DESCRIPTION,
+    		    IA32_SMRR_PHYSBASE_REPR,
+    		    IA32_SMRR_PHYSBASE_TEST_NAME]
+        return res
+
+    def SMRR_Protection_Cache_Attack(self, stderrList):
+    	"""
+			For CPU SMM Cache Poisoning
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "SMRR protection against cache attack is properly configured"
+    	msg_failure = "SMRR protection against cache attack is not configured properly"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "passed"
+    			break
+    		elif msg_failure in line:
+    			item = "failed"
+    			break
+
+    	res =   [SMMR_PROTECTION_AGAINST_CACHE_ATTACK_COLOR_CODE,
+    		    SMMR_PROTECTION_AGAINST_CACHE_ATTACK_CRITICALITY,
+    		    SMMR_PROTECTION_AGAINST_CACHE_ATTACK_EXPECTED_RESULT,
+    		    item,
+    		    SMMR_PROTECTION_AGAINST_CACHE_ATTACK_DESCRIPTION,
+    		    SMMR_PROTECTION_AGAINST_CACHE_ATTACK_REPR,
+    		    SMMR_PROTECTION_AGAINST_CACHE_ATTACK_TEST_NAME]
+        return res
+
+
+# ----------------------------------------------------------------------------- #
+#					   Memory Remap Configuration
+# ----------------------------------------------------------------------------- #
+
+    def Remap_window_configuration(self, stderrList):
+    	"""
+			For Memory Remap Configuration -chipsec/modules/remap.py
+    	"""
+    	item = 'UNKNOWN'
+    	msg_success = "Remap window configuration is correct: REMAPBASE <= REMAPLIMIT < TOUUD"
+    	msg_failure = "Remap window configuration is not correct"
+    	for line in stderrList:
+    		if msg_success in line:
+    			item = "passed"
+    			break
+    		elif msg_failure in line:
+    			item = "failed"
+    			break
+
+    	res =   [RemapWindowConfig_COLOR_CODE,
+    		    RemapWindowConfig_CRITICALITY,
+    		    RemapWindowConfig_EXPECTED_RESULT,
+    		    item,
+    		    RemapWindowConfig_DESCRIPTION,
+    		    RemapWindowConfig_REPR,
+    		    RemapWindowConfig_TEST_NAME]
+        return res
+
+    def TOUUD(self, stderrList):
+    	"""
+			For Memory Remap Configuration -chipsec/modules/remap.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "TOUUD"
+    	same_phrase_other_test = 'PCI'
+    	for line in stderrList:
+    		if phrase in line:
+    		   if same_phrase_other_test not in line:
+    		   		try:
+	    		   		start_idx = line.index(phrase)
+	    		   		item = line[start_idx:]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TOUUD_COLOR_CODE,
+    		    TOUUD_CRITICALITY,
+    		    TOUUD_EXPECTED_RESULT,
+    		    item,
+    		    TOUUD_DESCRIPTION,
+    		    TOUUD_REPR,
+    		    TOUUD_TEST_NAME]
+        return res
+
+
+    def TOLUD(self, stderrList):
+    	"""
+			For Memory Remap Configuration -chipsec/modules/remap.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "TOLUD"
+    	same_phrase_other_test = 'PCI'
+    	for line in stderrList:
+    		if phrase in line:
+    		   if same_phrase_other_test not in line:
+    		   		try:
+	    		   		start_idx = line.index(phrase)
+	    		   		item = line[start_idx:]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TOLUD_COLOR_CODE,
+    		    TOLUD_CRITICALITY,
+    		    TOLUD_EXPECTED_RESULT,
+    		    item,
+    		    TOLUD_DESCRIPTION,
+    		    TOLUD_REPR,
+    		    TOLUD_TEST_NAME]
+        return res
+
+# ----------------------------------------------------------------------------- #
+#				 Host Bridge Memory Map Locks
+# ----------------------------------------------------------------------------- #
+
+    def BDSM(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_BDSM"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [BDSM_COLOR_CODE,
+    		    BDSM_CRITICALITY,
+    		    BDSM_EXPECTED_RESULT,
+    		    item,
+    		    BDSM_DESCRIPTION,
+    		    BDSM_REPR,
+    		    BDSM_TEST_NAME]
+        return res
+
+    def BGSM(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_BGSM"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [BGSM_COLOR_CODE,
+    		    BGSM_CRITICALITY,
+    		    BGSM_EXPECTED_RESULT,
+    		    item,
+    		    BGSM_DESCRIPTION,
+    		    BGSM_REPR,
+    		    BGSM_TEST_NAME]
+        return res
+
+    def DPR(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_DPR"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [DPR_COLOR_CODE,
+    		    DPR_CRITICALITY,
+    		    DPR_EXPECTED_RESULT,
+    		    item,
+    		    DPR_DESCRIPTION,
+    		    DPR_REPR,
+    		    DPR_TEST_NAME]
+        return res
+
+    def GGC(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_GGC"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [GGC_COLOR_CODE,
+    		    GGC_CRITICALITY,
+    		    GGC_EXPECTED_RESULT,
+    		    item,
+    		    GGC_DESCRIPTION,
+    		    GGC_REPR,
+    		    GGC_TEST_NAME]
+        return res
+
+    def MESEG_MASK(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_MESEG_MASK"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [MESEG_MASK_COLOR_CODE,
+    		    MESEG_MASK_CRITICALITY,
+    		    MESEG_MASK_EXPECTED_RESULT,
+    		    item,
+    		    MESEG_MASK_DESCRIPTION,
+    		    MESEG_MASK_REPR,
+    		    MESEG_MASK_TEST_NAME]
+        return res
+
+    def PAVPC(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_PAVPC"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [PAVPC_COLOR_CODE,
+    		    PAVPC_CRITICALITY,
+    		    PAVPC_EXPECTED_RESULT,
+    		    item,
+    		    PAVPC_DESCRIPTION,
+    		    PAVPC_REPR,
+    		    PAVPC_TEST_NAME]
+        return res
+
+    def REMAPBASE(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_REMAPBASE"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [REMAPBASE_COLOR_CODE,
+    		    REMAPBASE_CRITICALITY,
+    		    REMAPBASE_EXPECTED_RESULT,
+    		    item,
+    		    REMAPBASE_DESCRIPTION,
+    		    REMAPBASE_REPR,
+    		    REMAPBASE_TEST_NAME]
+        return res
+
+    def REMAPLIMIT(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_REMAPLIMIT"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [REMAPLIMIT_COLOR_CODE,
+    		    REMAPLIMIT_CRITICALITY,
+    		    REMAPLIMIT_EXPECTED_RESULT,
+    		    item,
+    		    REMAPLIMIT_DESCRIPTION,
+    		    REMAPLIMIT_REPR,
+    		    REMAPLIMIT_TEST_NAME]
+        return res
+
+    def TOLUD_2(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_TOLUD"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TOLUD_2_COLOR_CODE,
+    		    TOLUD_2_CRITICALITY,
+    		    TOLUD_2_EXPECTED_RESULT,
+    		    item,
+    		    TOLUD_2_DESCRIPTION,
+    		    TOLUD_2_REPR,
+    		    TOLUD_2_TEST_NAME]
+        return res
+
+    def TOM(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_TOM"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TOM_COLOR_CODE,
+    		    TOM_CRITICALITY,
+    		    TOM_EXPECTED_RESULT,
+    		    item,
+    		    TOM_DESCRIPTION,
+    		    TOM_REPR,
+    		    TOM_TEST_NAME]
+        return res
+
+    def TOUUD_2(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_TOUUD"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TOUUD_2_COLOR_CODE,
+    		    TOUUD_2_CRITICALITY,
+    		    TOUUD_2_EXPECTED_RESULT,
+    		    item,
+    		    TOUUD_2_DESCRIPTION,
+    		    TOUUD_2_REPR,
+    		    TOUUD_2_TEST_NAME]
+        return res
+
+    def TSEGMB(self, stderrList):
+    	"""
+			 Host Bridge Memory Map Locks -chipsec/modules/memconfig.py
+    	"""
+    	item = 'UNKNOWN'
+    	phrase = "PCI0.0.0_TSEGMB"
+    	for line in stderrList:
+    		if phrase in line:
+    		   		try:
+    		   			start_idx = line.index(phrase)
+	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
+	    		   		item = line[start_idx:end_idx]
+	    		   		item = item.strip()
+	    		   	except:
+	    		   		item = "UNKNOWN"
+
+    	res =   [TSEGMB_COLOR_CODE,
+    		    TSEGMB_CRITICALITY,
+    		    TSEGMB_EXPECTED_RESULT,
+    		    item,
+    		    TSEGMB_DESCRIPTION,
+    		    TSEGMB_REPR,
+    		    TSEGMB_TEST_NAME]
+        return res
+
+    def TSEG_1(self, stderrList):
     	pass
 
-    def TSS_2(self, stderr):
+    def SMRR_range(self, stderrList):
     	pass
 
-    def Checking_SMRR_range_base_programming(self, stderr):
+    def BLE_1(self, stderrList):
     	pass
 
-    def Checking_SMRR_range_mask_programming(self, stderr):
+    def BLE_2(self, stderrList):
     	pass
 
-    def Verifying_SMRR_range_base_and_mask_are_same_on_all_logical_cpus(self, stderr):
-    	pass
-
-    def IA32_SMRR_PHYSBASE(self, stderr):
-    	pass
-
-    def Remap_window_configuration(self, stderr):
-    	pass
-
-    def TOUUD(self, stderr):
-    	pass
-
-    def TOLUD(self, stderr):
-    	pass
-
-    def BDSM(self, stderr):
-    	pass
-
-    def BGSM(self, stderr):
-    	pass
-
-    def DPR(self, stderr):
-    	pass
-
-    def GGC(self, stderr):
-    	pass
-
-    def MESEG_MASK(self, stderr):
-    	pass
-
-    def PAVPC(self, stderr):
-    	pass
-
-    def REMAPBASE(self, stderr):
-    	pass
-
-    def REMAPLIMIT(self, stderr):
-    	pass
-
-    def TOLUD(self, stderr):
-    	pass
-
-    def TOM(self, stderr):
-    	pass
-
-    def TOUUD(self, stderr):
-    	pass
-
-    def TSEGMB(self, stderr):
-    	pass
-
-    def TSEG_1(self, stderr):
-    	pass
-
-    def SMRR_range(self, stderr):
-    	pass
-
-    def BLE_1(self, stderr):
-    	pass
-
-    def BLE_2(self, stderr):
-    	pass
-
-    def TSEG_2(self, stderr):
+    def TSEG_2(self, stderrList):
     	pass
 
 

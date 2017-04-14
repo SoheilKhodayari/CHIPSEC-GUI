@@ -259,7 +259,7 @@ D_LCK_COLOR_CODE = "ORANGE"
 D_LCK_CRITICALITY = "NORMAL"
 D_LCK_EXPECTED_RESULT = "1"
 D_LCK_DESCRIPTION = "D_LCK_ description goes here\ndescription goes here" # use \n for newlines!
-D_LCK_REPR = "D_LCK_"
+D_LCK_REPR = "D_LCK"
 D_LCK_TEST_NAME = "Compatible SMM memory\n(SMRAM) Protection"
 
 
@@ -302,7 +302,7 @@ UL_TEST_NAME = "Protected RTC\nMemory Locations"
 #				IA32 Feature Control Lock
 # ----------------------------------------------------------------------------- #
 
-IA32_Lock_COLOR_CODE = "ORANGE_LIGHT"
+IA32_Lock_COLOR_CODE = "ORANGE"
 IA32_Lock_CRITICALITY = "NORMAL"
 IA32_Lock_EXPECTED_RESULT = "1"
 IA32_Lock_DESCRIPTION = "Lock description goes here\ndescription goes here" # use \n for newlines!
@@ -321,7 +321,7 @@ IA32_Lock_TEST_NAME = "IA32 Feature\nControl Lock"
 # ----------------------------------------------------------------------------- #
 
 
-BBRA_BBWA_COLOR_CODE = "ORANGE_LIGHT"
+BBRA_BBWA_COLOR_CODE = "ORANGE"
 BBRA_BBWA_CRITICALITY = "NORMAL"
 BBRA_BBWA_EXPECTED_RESULT = "Passed"
 BBRA_BBWA_DESCRIPTION = "BBRA and BBWA \ndescription goes here\ndescription goes here" # use \n for newlines!
@@ -349,4 +349,212 @@ FDOPSS_TEST_NAME = "SPI Flash Descriptor \nSecurity Override Pin-Strap"
 
 # ----------------------------------------------------------------------------- #
 #				End SPI Flash Descriptor Security Override Pin-Strap
+# ----------------------------------------------------------------------------- #
+
+# ----------------------------------------------------------------------------- #
+#				BIOS Interface Lock including Top Swap Mode
+# ----------------------------------------------------------------------------- #
+
+
+BILD_COLOR_CODE = "RED"
+BILD_CRITICALITY = "HIGH"
+BILD_EXPECTED_RESULT = "1"
+BILD_DESCRIPTION = "BILD \ndescription goes here\ndescription goes here" # use \n for newlines!
+BILD_REPR = "BILD"
+BILD_TEST_NAME = "BIOS Interface Lock \nincluding Top Swap Mode"
+
+TSS_2_COLOR_CODE = "YELLOW"
+TSS_2_CRITICALITY = "LOW"
+TSS_2_EXPECTED_RESULT = "0"
+TSS_2_DESCRIPTION = "TSS \ndescription goes here\ndescription goes here" # use \n for newlines!
+TSS_2_REPR = "TSS"
+TSS_2_TEST_NAME = "BIOS Interface Lock \nincluding Top Swap Mode"
+
+
+
+# ----------------------------------------------------------------------------- #
+#				End BIOS Interface Lock including Top Swap Mode
+# ----------------------------------------------------------------------------- #
+
+
+
+# ----------------------------------------------------------------------------- #
+#							CPU SMM Cache Poisoning
+# ----------------------------------------------------------------------------- #
+
+
+SMRR_range_base_COLOR_CODE = "ORANGE"
+SMRR_range_base_CRITICALITY = "NORMAL"
+SMRR_range_base_EXPECTED_RESULT = "Passed"
+SMRR_range_base_DESCRIPTION = "SMRR_range_base_programming\ndescription goes here\ndescription goes here" # use \n for newlines!
+SMRR_range_base_REPR = "SMRR_range_base_programming"
+SMRR_range_base_TEST_NAME = "CPU SMM Cache Poisoning"
+
+
+SMRR_range_mask_COLOR_CODE = "ORANGE"
+SMRR_range_mask_CRITICALITY = "NORMAL"
+SMRR_range_mask_EXPECTED_RESULT = "Passed"
+SMRR_range_mask_DESCRIPTION = "SMRR_range_mask_programming\ndescription goes here\ndescription goes here" # use \n for newlines!
+SMRR_range_mask_REPR = "SMRR_range_mask_programming"
+SMRR_range_mask_TEST_NAME = "CPU SMM Cache Poisoning"
+
+
+SMRR_range_base_and_mask_are_same_COLOR_CODE = "ORANGE"
+SMRR_range_base_and_mask_are_same_CRITICALITY = "NORMAL"
+SMRR_range_base_and_mask_are_same_EXPECTED_RESULT = "Passed"
+SMRR_range_base_and_mask_are_same_DESCRIPTION = "Verifying SMRR\nrange base\nand mask are\nsame on all\nlogical_cpus description" # use \n for newlines!
+SMRR_range_base_and_mask_are_same_REPR = "Same SMRR range\nBase and Mask\non all logical cpus"
+SMRR_range_base_and_mask_are_same_TEST_NAME = "CPU SMM Cache Poisoning"
+
+
+IA32_SMRR_PHYSBASE_COLOR_CODE = "RED"
+IA32_SMRR_PHYSBASE_CRITICALITY = "HIGH"
+IA32_SMRR_PHYSBASE_EXPECTED_RESULT = "Permissible Values"
+IA32_SMRR_PHYSBASE_DESCRIPTION = "IA32_SMRR_PHYSBASE \ndescription goes here\ndescription goes here" # use \n for newlines!
+IA32_SMRR_PHYSBASE_REPR = "IA32_SMRR_PHYSBASE"
+IA32_SMRR_PHYSBASE_TEST_NAME = "CPU SMM Cache Poisoning"
+
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_COLOR_CODE = "ORANGE"
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_CRITICALITY = "NORMAL"
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_EXPECTED_RESULT = "Passed"
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_DESCRIPTION = "SMRR Protection Against\nCache Attack\ndescription goes here" # use \n for newlines!
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_REPR = "SMRR Protection Against\nCache Attack"
+SMMR_PROTECTION_AGAINST_CACHE_ATTACK_TEST_NAME = "CPU SMM Cache Poisoning"
+
+# ----------------------------------------------------------------------------- #
+#						  End CPU SMM Cache Poisoning
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#					   Memory Remap Configuration
+# ----------------------------------------------------------------------------- #
+
+
+RemapWindowConfig_COLOR_CODE = "GREEN"
+RemapWindowConfig_CRITICALITY = "Not Critical"
+RemapWindowConfig_EXPECTED_RESULT = "Passed"
+RemapWindowConfig_DESCRIPTION = "Remap Window Configuration\ndescription goes here\ndescription goes here" # use \n for newlines!
+RemapWindowConfig_REPR = "Remap Window Configuration"
+RemapWindowConfig_TEST_NAME = "Memory Remap Configuration"
+
+TOUUD_COLOR_CODE = "ORANGE"
+TOUUD_CRITICALITY = "NORMAL"
+TOUUD_EXPECTED_RESULT = "Permissible Values"
+TOUUD_DESCRIPTION = "TOUUD \ndescription goes here\ndescription goes here" # use \n for newlines!
+TOUUD_REPR = "TOUUD"
+TOUUD_TEST_NAME = "Memory Remap Configuration"
+
+TOLUD_COLOR_CODE = "ORANGE"
+TOLUD_CRITICALITY = "NORMAL"
+TOLUD_EXPECTED_RESULT = "Permissible Values"
+TOLUD_DESCRIPTION = "TOLUD \ndescription goes here\ndescription goes here" # use \n for newlines!
+TOLUD_REPR = "TOLUD"
+TOLUD_TEST_NAME = "Memory Remap Configuration"
+
+
+
+# ----------------------------------------------------------------------------- #
+#					  End Memory Remap Configuration
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				 Host Bridge Memory Map Locks
+# ----------------------------------------------------------------------------- #
+
+
+BDSM_COLOR_CODE = "YELLOW"
+BDSM_CRITICALITY = "LOW"
+BDSM_EXPECTED_RESULT = "LOCKED"
+BDSM_DESCRIPTION = "BDSM \ndescription goes here\ndescription goes here" # use \n for newlines!
+BDSM_REPR = "BDSM"
+BDSM_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+
+BGSM_COLOR_CODE = "YELLOW"
+BGSM_CRITICALITY = "LOW"
+BGSM_EXPECTED_RESULT = "LOCKED"
+BGSM_DESCRIPTION = "BGSM \ndescription goes here\ndescription goes here" # use \n for newlines!
+BGSM_REPR = "BGSM"
+BGSM_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+
+DPR_COLOR_CODE = "ORANGE"
+DPR_CRITICALITY = "NORMAL"
+DPR_EXPECTED_RESULT = "LOCKED"
+DPR_DESCRIPTION = "DPR \ndescription goes here\ndescription goes here" # use \n for newlines!
+DPR_REPR = "DPR"
+DPR_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+GGC_COLOR_CODE = "GREEN"
+GGC_CRITICALITY = "Not Critical"
+GGC_EXPECTED_RESULT = "LOCKED"
+GGC_DESCRIPTION = "GGC \ndescription goes here\ndescription goes here" # use \n for newlines!
+GGC_REPR = "GGC"
+GGC_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+MESEG_MASK_COLOR_CODE = "RED"
+MESEG_MASK_CRITICALITY = "HIGH"
+MESEG_MASK_EXPECTED_RESULT = "LOCKED"
+MESEG_MASK_DESCRIPTION = "MESEG_MASK \ndescription goes here\ndescription goes here" # use \n for newlines!
+MESEG_MASK_REPR = "MESEG_MASK"
+MESEG_MASK_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+PAVPC_COLOR_CODE = "YELLOW"
+PAVPC_CRITICALITY = "LOW"
+PAVPC_EXPECTED_RESULT = "LOCKED"
+PAVPC_DESCRIPTION = "PAVPC \ndescription goes here\ndescription goes here" # use \n for newlines!
+PAVPC_REPR = "PAVPC"
+PAVPC_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+REMAPBASE_COLOR_CODE = "ORANGE"
+REMAPBASE_CRITICALITY = "NORMAL"
+REMAPBASE_EXPECTED_RESULT = "LOCKED"
+REMAPBASE_DESCRIPTION = "REMAPBASE \ndescription goes here\ndescription goes here" # use \n for newlines!
+REMAPBASE_REPR = "REMAPBASE"
+REMAPBASE_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+REMAPLIMIT_COLOR_CODE = "ORANGE"
+REMAPLIMIT_CRITICALITY = "NORMAL"
+REMAPLIMIT_EXPECTED_RESULT = "LOCKED"
+REMAPLIMIT_DESCRIPTION = "REMAPLIMIT \ndescription goes here\ndescription goes here" # use \n for newlines!
+REMAPLIMIT_REPR = "REMAPLIMIT"
+REMAPLIMIT_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+TOLUD_2_COLOR_CODE = "ORANGE"
+TOLUD_2_CRITICALITY = "NORMAL"
+TOLUD_2_EXPECTED_RESULT = "LOCKED"
+TOLUD_2_DESCRIPTION = "TOLUD \ndescription goes here\ndescription goes here" # use \n for newlines!
+TOLUD_2_REPR = "TOLUD"
+TOLUD_2_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+
+TOM_COLOR_CODE = "ORANGE"
+TOM_CRITICALITY = "NORMAL"
+TOM_EXPECTED_RESULT = "LOCKED"
+TOM_DESCRIPTION = "TOM \ndescription goes here\ndescription goes here" # use \n for newlines!
+TOM_REPR = "TOM"
+TOM_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+
+TOUUD_2_COLOR_CODE = "ORANGE"
+TOUUD_2_CRITICALITY = "NORMAL"
+TOUUD_2_EXPECTED_RESULT = "LOCKED"
+TOUUD_2_DESCRIPTION = "TOUUD \ndescription goes here\ndescription goes here" # use \n for newlines!
+TOUUD_2_REPR = "TOUUD"
+TOUUD_2_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+TSEGMB_COLOR_CODE = "ORANGE"
+TSEGMB_CRITICALITY = "NORMAL"
+TSEGMB_EXPECTED_RESULT = "LOCKED"
+TSEGMB_DESCRIPTION = "TSEGMB \ndescription goes here\ndescription goes here" # use \n for newlines!
+TSEGMB_REPR = "TSEGMB"
+TSEGMB_TEST_NAME = "Host Bridge Memory\nMap Locks"
+
+
+
+
+# ----------------------------------------------------------------------------- #
+#				 End Host Bridge Memory Map Locks
 # ----------------------------------------------------------------------------- #
