@@ -224,8 +224,8 @@ class mainWindow(QtGui.QWidget):
 
 		# -- create Hboxes and add to OverallQVLayoutNearTestSuite as a row
 		self._enable_output_save_lbl = QtGui.QLabel()
-		self._enable_output_save_lbl.setText("Save Test Output:")
-		self._enable_output_save_lbl.setFixedWidth(110)
+		self._enable_output_save_lbl.setText("Save Terminal Output:")
+		self._enable_output_save_lbl.setFixedWidth(135)
 		self._enable_output_save_chkbox = QtGui.QCheckBox()
 		QHRow1 = QtGui.QHBoxLayout()
 		QHRow1.addWidget(self._enable_output_save_lbl)
@@ -440,6 +440,7 @@ class mainWindow(QtGui.QWidget):
 		self._ignore_platform_mode_lbl.setText("ignore-platform mode:")
 		self._ignore_platform_mode_lbl.setFixedWidth(150)
 		self._ignore_platform_mode_chk = QtGui.QCheckBox()
+		self._ignore_platform_mode_chk.setCheckState(Qt.Checked)
 		self._ignore_platform_mode_info_lbl = QtGui.QLabel()
 		self._ignore_platform_mode_info_lbl.setText("(info)")
 		self._ignore_platform_mode_i = QtGui.QPushButton('i',self)
@@ -741,7 +742,7 @@ class mainWindow(QtGui.QWidget):
 	# ---------------------------------------------------------------------------------#
 	
 	def _generate_categorize_output_main(self, command):
-  		thread = PythonThread(command)
+  		thread = PythonThread(command, self._desired_test_list)
   		self.connect(thread, SIGNAL("finished()"), lambda th=thread : self._on_thread_task_finished(th))
   		thread.start()
 
@@ -750,7 +751,9 @@ class mainWindow(QtGui.QWidget):
   		self.test_summary_widget.setMinimumWidth(1000)
   		self.test_summary_widget.setMinimumHeight(600)
 
-
+  		# return if there is a test which there is nothing to show for in the table widget
+  		if len(thread.outputData) == 0:
+  			return None   
 		table = categoryTable(thread.outputData)
 
   		QH = QHBoxLayout()

@@ -58,9 +58,10 @@ class categoryTable(QtGui.QTableWidget):
 
 
 class PythonThread (QtCore.QThread):
-    def __init__(self, cmdline, parent=None):
+    def __init__(self, cmdline, test_suite, parent=None):
         QtCore.QThread.__init__(self, parent)
         self.cmdline = cmdline
+        self.test_suite = test_suite
         self.outputData = None
 
     def __del__(self):
@@ -72,127 +73,99 @@ class PythonThread (QtCore.QThread):
     def run(self):
 		stderr = _sudo_exec(self.cmdline, ROOT_PASSWORD)
 		stderrAsList = stderr.split('\r\n')
+		results = []
 
-
-		# test 1
-		flockdn_res = self.FLOCKDN(stderrAsList)
-
-		# test 2
-		smm_bwp_2_res = self.SMM_BWP_2(stderrAsList)
-		tco_smi_lock_res = self.TCO_SMI_LOCK(stderrAsList)
-		smi_lock_res = self.SMI_LOCK(stderrAsList)
-		global_smi_en_res = self.Global_SMI_EN(stderrAsList)
-		tco1_cnt_en_res = self.TCO1_CNT(stderrAsList)
-
-		# test 3
-		bios_keyboard_buff = self.BIOS_Keyboard_Buffer(stderrAsList)
-
-		# test 4
-		bioswe_res = self.BIOSWE(stderrAsList)
-		ble_res = self.BLE(stderrAsList)
-		src_res = self.SRC(stderrAsList)
-		tss = self.TSS(stderrAsList)
-		smm_bwp_res = self.SMM_BWP(stderrAsList)
-
-		# test 5
-		d_lck_res = self.D_LCK(stderrAsList)
-
-		# test 6 = 
-		rtc_ue_res = self.UE(stderrAsList)
-		rtc_ll_res = self.LL(stderrAsList)
-		rtc_ul_res = self.UL(stderrAsList)
-
-		#test 7
-		ia32_lock = self.Lock(stderrAsList)
-
-		#test 8
-		bbra_bbwa = self.BRRA_and_BRWA(stderrAsList)
-
-		#test 9
-		fdopss_res = self.FDOPSS(stderrAsList)
-
-		#test 10
-		bild_res = self.BILD(stderrAsList)
-		tss_2_res = self.TSS_2(stderrAsList)
-
-		#test 11
-		smrr_range_base_res = self.Checking_SMRR_range_base_programming(stderrAsList)
-		smrr_range_mask_res = self.Checking_SMRR_range_mask_programming(stderrAsList)
-		smrr_same_on_logical_cpus = self.Verifying_SMRR_range_base_and_mask_are_same_on_all_logical_cpus(stderrAsList)
-		smrr_ia32_physbase_res = self.IA32_SMRR_PHYSBASE(stderrAsList)
-		smrr_protection_cache_res = self.SMRR_Protection_Cache_Attack(stderrAsList)
-
-		#test 12
-		remap_win_conf_res = self.Remap_window_configuration(stderrAsList)
-		touud_res = self.TOUUD(stderrAsList)
-		tolud_res = self.TOLUD(stderrAsList)
-
-		#test 13
-		bdsm_res = self.BDSM(stderrAsList)
-		bgsm_res = self.BGSM(stderrAsList)
-		ggc_res = self.GGC(stderrAsList)
-		dpr_res = self.DPR(stderrAsList)
-		mseg_mask_res = self.MESEG_MASK(stderrAsList)
-		pavpc_res = self.PAVPC(stderrAsList)
-		remapbase_res = self.REMAPBASE(stderrAsList)
-		remaplimit_res = self.REMAPLIMIT(stderrAsList)
-		tolud_2_res = self.TOLUD_2(stderrAsList)
-		tom_res = self.TOM(stderrAsList)
-		touud_2_res = self.TOUUD_2(stderrAsList)
-		tseg_mb_res = self.TSEGMB(stderrAsList)
-
-
-		#test 14
-		test_14_res_list = self.TSEG_1_and_SMRR_range(stderrAsList)
-		tseg_1_res = test_14_res_list[0]
-		smrr_range_res = test_14_res_list[1]
-
-
-
-		results = [flockdn_res,
-		smm_bwp_2_res, 
-		tco_smi_lock_res,
-		smi_lock_res,
-		global_smi_en_res,
-		tco1_cnt_en_res,
-		bios_keyboard_buff,
-		bioswe_res,
-		ble_res,
-		src_res,
-		tss,
-		smm_bwp_res,
-		d_lck_res,
-		rtc_ue_res,
-		rtc_ll_res,
-		rtc_ul_res,
-		ia32_lock,
-		bbra_bbwa,
-		fdopss_res,
-		bild_res,
-		tss_2_res,
-		smrr_range_base_res,
-		smrr_range_mask_res,
-		smrr_same_on_logical_cpus,
-		smrr_ia32_physbase_res,
-		smrr_protection_cache_res,
-		remap_win_conf_res,
-		touud_res,
-		tolud_res,
-		bdsm_res,
-		bgsm_res,
-		ggc_res,
-		dpr_res,
-		mseg_mask_res,
-		pavpc_res,
-		remapbase_res,
-		remaplimit_res,
-		tolud_2_res,
-		tom_res,
-		touud_2_res,
-		tseg_mb_res,
-		tseg_1_res,
-		smrr_range_res
-		]
+		for test in self.test_suite:
+			if test == "spi_lock":
+				# test 1
+				flockdn_res = self.FLOCKDN(stderrAsList)
+				results.append(flockdn_res)
+			elif test == "bios_smi":
+				# test 2
+				smm_bwp_2_res = self.SMM_BWP_2(stderrAsList)
+				tco_smi_lock_res = self.TCO_SMI_LOCK(stderrAsList)
+				smi_lock_res = self.SMI_LOCK(stderrAsList)
+				global_smi_en_res = self.Global_SMI_EN(stderrAsList)
+				tco1_cnt_en_res = self.TCO1_CNT(stderrAsList)
+				results+=[smm_bwp_2_res,tco_smi_lock_res,smi_lock_res,global_smi_en_res,tco1_cnt_en_res]
+			elif test == "bios_kbrd_buffer":
+				# test 3
+				bios_keyboard_buff = self.BIOS_Keyboard_Buffer(stderrAsList)
+				results.append(bios_keyboard_buff)
+			elif test == "bios_wp":
+				# test 4
+				bioswe_res = self.BIOSWE(stderrAsList)
+				ble_res = self.BLE(stderrAsList)
+				src_res = self.SRC(stderrAsList)
+				tss = self.TSS(stderrAsList)
+				smm_bwp_res = self.SMM_BWP(stderrAsList)
+				results += [bioswe_res,ble_res,src_res,tss,smm_bwp_res]
+			elif test == "smm":	
+				# test 5
+				d_lck_res = self.D_LCK(stderrAsList)
+				results.append(d_lck_res)
+			elif test == "rtclock":
+				# test 6 = 
+				rtc_ue_res = self.UE(stderrAsList)
+				rtc_ll_res = self.LL(stderrAsList)
+				rtc_ul_res = self.UL(stderrAsList)
+				results+=[rtc_ue_res,rtc_ll_res,rtc_ul_res]
+			elif test == "ia32cfg":
+				#test 7
+				ia32_lock = self.Lock(stderrAsList)
+				results.append(ia32_lock)
+			elif test == "spi_desc":
+				#test 8
+				bbra_bbwa = self.BRRA_and_BRWA(stderrAsList)
+				results.append(bbra_bbwa)
+			elif test == "spi_fdopss":
+				#test 9
+				fdopss_res = self.FDOPSS(stderrAsList)
+				results.append(fdopss_res)
+			elif test == "bios_ts":
+				#test 10
+				bild_res = self.BILD(stderrAsList)
+				tss_2_res = self.TSS_2(stderrAsList)
+				results += [bild_res,tss_2_res]
+			elif test == "smrr":
+				#test 11
+				smrr_range_base_res = self.Checking_SMRR_range_base_programming(stderrAsList)
+				smrr_range_mask_res = self.Checking_SMRR_range_mask_programming(stderrAsList)
+				smrr_same_on_logical_cpus = self.Verifying_SMRR_range_base_and_mask_are_same_on_all_logical_cpus(stderrAsList)
+				smrr_ia32_physbase_res = self.IA32_SMRR_PHYSBASE(stderrAsList)
+				smrr_protection_cache_res = self.SMRR_Protection_Cache_Attack(stderrAsList)
+				results += [smrr_range_base_res,smrr_range_mask_res,
+						   smrr_same_on_logical_cpus,smrr_ia32_physbase_res,
+				           smrr_protection_cache_res]
+			elif test == "remap":
+				#test 12
+				remap_win_conf_res = self.Remap_window_configuration(stderrAsList)
+				touud_res = self.TOUUD(stderrAsList)
+				tolud_res = self.TOLUD(stderrAsList)
+				results+=[touud_res,tolud_res]
+			elif test == "memconfig":
+				#test 13
+				bdsm_res = self.BDSM(stderrAsList)
+				bgsm_res = self.BGSM(stderrAsList)
+				ggc_res = self.GGC(stderrAsList)
+				dpr_res = self.DPR(stderrAsList)
+				mseg_mask_res = self.MESEG_MASK(stderrAsList)
+				pavpc_res = self.PAVPC(stderrAsList)
+				remapbase_res = self.REMAPBASE(stderrAsList)
+				remaplimit_res = self.REMAPLIMIT(stderrAsList)
+				tolud_2_res = self.TOLUD_2(stderrAsList)
+				tom_res = self.TOM(stderrAsList)
+				touud_2_res = self.TOUUD_2(stderrAsList)
+				tseg_mb_res = self.TSEGMB(stderrAsList)
+				results+=[bdsm_res,bgsm_res,ggc_res,dpr_res,mseg_mask_res,pavpc_res,
+						  remapbase_res,remaplimit_res,tolud_2_res,tom_res,
+						  touud_2_res,tseg_mb_res]
+			elif test == "smm_dma":
+				#test 14
+				test_14_res_list = self.TSEG_1_and_SMRR_range(stderrAsList)
+				tseg_1_res = test_14_res_list[0]
+				smrr_range_res = test_14_res_list[1]
+				results+=[tseg_1_res,smrr_range_res]
 
 		self.outputData = results
 

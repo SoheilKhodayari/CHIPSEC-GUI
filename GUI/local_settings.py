@@ -49,6 +49,12 @@ QRY_MODULE_PATH = {
 }
 
 TEST_DIRECTIORY_LIST = [COMMON_DIR,SECURE_BOOT_DIR,UEFI_DIR,OTHER_MODULES_DIR]
+
+# @Note: tests are fetched automatically from the dirs in TEST_DIRECTIORY_LIST
+# to use below lisr instead, pass true to _fetch_test_suite_list() function.
+# below list is not used by default
+AVAILABLE_TESTS = QRY_MODULE_PATH.keys()
+
 # ----------------------------------------------------------------------------- #
 #						APP MSG, ERRORS, ETC
 # ----------------------------------------------------------------------------- #
@@ -62,11 +68,6 @@ SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG = "No Test Summary Exists Yet!"
 # ----------------------------------------------------------------------------- #
 
 
-# @Note: tests are fetched automatically from the dirs in TEST_DIRECTIORY_LIST
-# to use below lisr instead, pass true to _fetch_test_suite_list() function.
-# below list is not used by default
-AVAILABLE_TESTS = QRY_MODULE_PATH.keys()
-
 TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'bios_smi': 'msg2',
 				'bios_ts': 'msg3',
@@ -77,7 +78,14 @@ TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'smrr': 'msg8',
 				'spi_desc': 'msg9',
 				'spi_fdopss': 'msg10',
-				'spi_lock':'msg11'}
+				'spi_lock':'msg11',
+				'memconfig':'msg11',
+				'remap':'msg11',
+				'smm_dma':'msg11',
+				'variables':'msg11',
+				'access_uefispec':'msg11',
+				's3bootscript':'msg11'
+				}
 
 
 DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
@@ -90,7 +98,14 @@ DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'smrr': 'msg8',
 				'spi_desc': 'msg9',
 				'spi_fdopss': 'msg10',
-				'spi_lock':'msg11'}
+				'spi_lock':'msg11',
+				'memconfig':'msg11',
+				'remap':'msg11',
+				'smm_dma':'msg11',
+				'variables':'msg11',
+				'access_uefispec':'msg11',
+				's3bootscript':'msg11'
+				}
 
 
 ADDITIONAL_TEST_USAGE_MESSAGE = "You can select and run your own tests."
