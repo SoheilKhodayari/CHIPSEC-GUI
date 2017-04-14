@@ -130,20 +130,6 @@ class Main(QtGui.QMainWindow):
     def runCommandInFirstTerminal(self,command):
         self.console.runCommand(command)
 
-    # def _render_help_dialog(self):
-    #     w = QtGui.QWidget()
-    #     Qv = QVBoxLayout()
-    #     label1 = QLabel()
-    #     label1.setText("Terminal(TMUX) Scroll Mode Keys:")
-    #     label2 = QLabel()
-    #     label2.setText("Press: CTRL + b + [ to switch to  scroll mode")
-    #     label3 = QLabel()
-    #     label3.setText("press: q to exit scroll mode")
-    #     Qv.addWidget(label2)
-    #     Qv.addWidget(label2)
-    #     Qv.addWidget(label3)
-    #     w.setLayout(Qv)
-    #     w.show()
 
 
 
@@ -158,10 +144,22 @@ def main(argv=None):
         appModel = argv[0]
     else:
         appModel = "py"
-    ex = Main(appModel)
-    ex.show()
-    
+
+
+    splash_pix = QtGui.QPixmap('icons/logoMain.png')
+    splash = QtGui.QSplashScreen(splash_pix, QtCore.Qt.WindowStaysOnTopHint)
+    splash.show()
+
+    def render_main_app(appModel):
+        splash.close()
+        global ex
+        ex = Main(appModel)
+        ex.show()
+
+
+    QtCore.QTimer.singleShot(1000, lambda appModel=appModel: render_main_app(appModel))
     sys.exit(app.exec_())
+
 
 
 if __name__ == '__main__':
