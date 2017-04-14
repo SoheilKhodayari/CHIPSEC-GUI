@@ -2,17 +2,53 @@
 import os 
 
 
-BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+
+# ----------------------------------------------------------------------------- #
+#						OS ROOT PASSWORD
+# ----------------------------------------------------------------------------- #
 
 # -- ROOT_PASSWORD
 ROOT_PASSWORD = "9759865"
+
+
+# ----------------------------------------------------------------------------- #
+#						APP SETTING
+# ----------------------------------------------------------------------------- #
+
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
 # -- RELATIVE_REPORT_PATH
 RELATIVE_REPORTS_FOLDER = "/reports"
 REPORT_PATH = BASE_PATH + RELATIVE_REPORTS_FOLDER
 
+# -- MODULES PATH HELPER
+CHIPSEC_PATH = BASE_PATH[:BASE_PATH.rindex('/GUI')]
+OTHER_MODULES_DIR = CHIPSEC_PATH + "/chipsec/modules"
+COMMON_DIR = CHIPSEC_PATH + "/chipsec/modules/common"
+SECURE_BOOT_DIR = COMMON_DIR + "/secureboot"
+UEFI_DIR = COMMON_DIR + "/uefi"
 
+QRY_MODULE_PATH = {
+	"memconfig":OTHER_MODULES_DIR,
+	"remap": OTHER_MODULES_DIR,
+	"smm_dma": OTHER_MODULES_DIR,
+	"variables": SECURE_BOOT_DIR,
+	"access_uefispec":UEFI_DIR,
+	"s3bootscript": UEFI_DIR,
+	"bios_kbrd_buffer":COMMON_DIR,
+	"bios_smi":COMMON_DIR,
+	"bios_ts":COMMON_DIR,
+	"bios_wp":COMMON_DIR,
+	"ia32cfg":COMMON_DIR,
+	"rtclock":COMMON_DIR,
+	"smm":COMMON_DIR,
+	"smrr":COMMON_DIR,
+	"spi_desc":COMMON_DIR,
+	"spi_fdopss":COMMON_DIR,
+	"spi_lock":COMMON_DIR
+}
 
+TEST_DIRECTIORY_LIST = [COMMON_DIR,SECURE_BOOT_DIR,UEFI_DIR,OTHER_MODULES_DIR]
 # ----------------------------------------------------------------------------- #
 #						APP MSG, ERRORS, ETC
 # ----------------------------------------------------------------------------- #
@@ -26,11 +62,10 @@ SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG = "No Test Summary Exists Yet!"
 # ----------------------------------------------------------------------------- #
 
 
-# @Note: tests are fetched automatically from the modules/common directory.
-# to use below dictionary instead, pass true to _fetch_test_suite_list() function.
-# below dictionary is not used by default
-AVAILABLE_TESTS = ['bios_kbrd_buffer','bios_smi','bios_ts',
-'bios_wp','ia32cfg','rtclock','smm','smrr','spi_desc','spi_fdopss','spi_lock']
+# @Note: tests are fetched automatically from the dirs in TEST_DIRECTIORY_LIST
+# to use below lisr instead, pass true to _fetch_test_suite_list() function.
+# below list is not used by default
+AVAILABLE_TESTS = QRY_MODULE_PATH.keys()
 
 TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
 				'bios_smi': 'msg2',

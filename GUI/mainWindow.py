@@ -21,7 +21,7 @@ from local_settings import VERBOSE_MODE_SHORT_MSG, VERBOSE_MODE_LONG_MSG, \
 						   NODRIVER_MODE_SHORT_MSG, NODRIVER_MODE_LONG_MSG, \
 						   ADDITIONAL_TEST_I_SHORT_MSG, ADDITIONAL_TEST_I_LONG_MSG, \
 						   ADDITIONAL_TEST_USAGE_MESSAGE, REPORT_PATH, ROOT_PASSWORD, \
-						   BASE_PATH
+						   BASE_PATH, QRY_MODULE_PATH, TEST_DIRECTIORY_LIST
 
 from categoryWorker import *
 
@@ -134,15 +134,17 @@ class mainWindow(QtGui.QWidget):
 			global AVAILABLE_TESTS
 			self._test_suite = AVAILABLE_TESTS
 			return AVAILABLE_TESTS
-		modules_dir = "../chipsec/modules/common"
+		
 		results = []
-		for file in os.listdir(modules_dir):
-			if self.parent.get_app_model() == "pyc":
-				if (file.endswith(".pyc")) and (file != "__init__.pyc"):
-					results.append(file[:-4])
-			else:
-				if (file.endswith(".py")) and (file != "__init__.py"):
-					results.append(file[:-3])		
+		global TEST_DIRECTIORY_LIST
+		for modules_dir in TEST_DIRECTIORY_LIST:		
+			for file in os.listdir(modules_dir):
+				if self.parent.get_app_model() == "pyc":
+					if (file.endswith(".pyc")) and (file != "__init__.pyc"):
+						results.append(file[:-4])
+				else:
+					if (file.endswith(".py")) and (file != "__init__.py"):
+						results.append(file[:-3])		
 		self._test_suite = results
 		return results
 
@@ -591,7 +593,8 @@ class mainWindow(QtGui.QWidget):
 			# no need to add -m switch in case of all tests
 			module_name = "All Tests" # JUST TO PASS THE CASE WHICH IS DISALLOWED
 		else:
-			switch_dict['-m'] = module_name
+			mod_dir = QRY_MODULE_PATH[str(module_name)]
+			switch_dict['-m'] = mod_dir + "/" + str(module_name)
 
 		# -- handle save output---------------------------------------------------
 		if self._enable_output_save_chkbox.isChecked():
