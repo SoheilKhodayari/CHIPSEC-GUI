@@ -142,6 +142,11 @@ class PythonThread (QtCore.QThread):
 		tseg_mb_res = self.TSEGMB(stderrAsList)
 
 
+		#test 14
+		test_14_res_list = self.TSEG_1_and_SMRR_range(stderrAsList)
+		tseg_1_res = test_14_res_list[0]
+		smrr_range_res = test_14_res_list[1]
+
 
 
 		results = [flockdn_res,
@@ -184,7 +189,9 @@ class PythonThread (QtCore.QThread):
 		tolud_2_res,
 		tom_res,
 		touud_2_res,
-		tseg_mb_res
+		tseg_mb_res,
+		tseg_1_res,
+		smrr_range_res
 		]
 
 		self.outputData = results
@@ -915,6 +922,7 @@ class PythonThread (QtCore.QThread):
 	    		   		start_idx = line.index(phrase)
 	    		   		item = line[start_idx:]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -942,6 +950,7 @@ class PythonThread (QtCore.QThread):
 	    		   		start_idx = line.index(phrase)
 	    		   		item = line[start_idx:]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -971,6 +980,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -996,6 +1006,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1021,6 +1032,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1046,6 +1058,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1071,6 +1084,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1096,6 +1110,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1121,6 +1136,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1146,6 +1162,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1171,6 +1188,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1196,6 +1214,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1221,6 +1240,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1246,6 +1266,7 @@ class PythonThread (QtCore.QThread):
 	    		   		end_idx = line.index("LOCKED")+len("LOCKED")+1
 	    		   		item = line[start_idx:end_idx]
 	    		   		item = item.strip()
+	    		   		break
 	    		   	except:
 	    		   		item = "UNKNOWN"
 
@@ -1258,11 +1279,55 @@ class PythonThread (QtCore.QThread):
     		    TSEGMB_TEST_NAME]
         return res
 
-    def TSEG_1(self, stderrList):
-    	pass
+# ----------------------------------------------------------------------------- #
+#				SMM TSEG Range Configuration Check
+# ----------------------------------------------------------------------------- #
 
-    def SMRR_range(self, stderrList):
-    	pass
+    def TSEG_1_and_SMRR_range(self, stderrList):
+    	"""
+			 SMM TSEG Range Configuration Check -chipsec/modules/smm_dma.py
+    	"""
+    	item1 = 'UNKNOWN'
+    	item2 = 'UNKNOWN'
+    	phrase = "SMM TSEG Range Configuration Check"
+    	for i in range(len(stderrList)):
+    		if phrase in stderrList[i]:
+    		   		try:
+    		   			TSEG_line = stderrList[i+2]
+    		   			tseg_start_idx = TSEG_line.index('TSEG')
+    		   			tseg_end_idx = TSEG_line.index('(size')
+    		   			item1 = TSEG_line[tseg_start_idx: tseg_end_idx]
+
+    		   			SMRR_range_line = stderrList[i+3]
+    		   			smrr_start_idx = SMRR_range_line.index('SMRR')
+    		   			smrr_end_idx = SMRR_range_line.index('(size')
+    		   			item2 = SMRR_range_line[smrr_start_idx: smrr_end_idx]
+    		   			break
+	    		   	except:
+	    		   		item1 = "UNKNOWN"
+	    		   		item2 = "UNKNOWN"
+
+    	res1 =   [TSEG_1_COLOR_CODE,
+    		    TSEG_1_CRITICALITY,
+    		    TSEG_1_EXPECTED_RESULT,
+    		    item1,
+    		    TSEG_1_DESCRIPTION,
+    		    TSEG_1_REPR,
+    		    TSEG_1_TEST_NAME]
+
+    	res2 =   [SMRR_Range_COLOR_CODE,
+    		    SMRR_Range_CRITICALITY,
+    		    SMRR_Range_EXPECTED_RESULT,
+    		    item2,
+    		    SMRR_Range_DESCRIPTION,
+    		    SMRR_Range_REPR,
+    		    SMRR_Range_TEST_NAME]
+
+        return [res1, res2]
+        
+
+    # def SMRR_range(self, stderrList):
+    # 	pass
 
     def BLE_1(self, stderrList):
     	pass

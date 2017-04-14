@@ -553,8 +553,32 @@ TSEGMB_REPR = "TSEGMB"
 TSEGMB_TEST_NAME = "Host Bridge Memory\nMap Locks"
 
 
+# ----------------------------------------------------------------------------- #
+#				 End Host Bridge Memory Map Locks
+# ----------------------------------------------------------------------------- #
 
 
 # ----------------------------------------------------------------------------- #
-#				 End Host Bridge Memory Map Locks
+#				 SMM TSEG Range Configuration Check
+# ----------------------------------------------------------------------------- #
+
+TSEG_1_COLOR_CODE = "ORANGE"
+TSEG_1_CRITICALITY = "NORMAL"
+TSEG_1_EXPECTED_RESULT = "-"
+TSEG_1_DESCRIPTION = "TSEG \ndescription goes here\ndescription goes here" # use \n for newlines!
+TSEG_1_REPR = "TSEG"
+TSEG_1_TEST_NAME = "SMM TSEG Range\nConfiguration Check"
+
+
+SMRR_Range_COLOR_CODE = "ORANGE"
+SMRR_Range_CRITICALITY = "NORMAL"
+SMRR_Range_EXPECTED_RESULT = "-"
+SMRR_Range_DESCRIPTION = "SMRR_Range \ndescription goes here\ndescription goes here" # use \n for newlines!
+SMRR_Range_REPR = "SMRR_Range"
+SMRR_Range_TEST_NAME = "SMM TSEG Range\nConfiguration Check"
+
+
+
+# ----------------------------------------------------------------------------- #
+#				 End SMM TSEG Range Configuration Check
 # ----------------------------------------------------------------------------- #
