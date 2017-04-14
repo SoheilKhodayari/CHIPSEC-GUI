@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<testsuites>
+	<testsuite errors="0" failures="1" name="s" skipped="0" tests="1" time="0.00206">
+		<properties>
+			<property name="OS" value="Linux 4.4.0-66-generic #87-Ubuntu SMP Fri Mar 3 15:29:05 UTC 2017 x86_64"/>
+			<property name="Platform" value="UnknownPlatform, VID: 8086, DID: 7190"/>
+			<property name="CHIPSEC" value="1.2.5"/>
+		</properties>
+		<testcase classname="chipsec.modules.common.bios_wp" name="BIOS Region Write Protection" time="0.00206">
+			<failure message="BIOS is NOT protected completely" type="failure"/>
+			<system-out>[*] BC = 0xFF &lt;&lt; BIOS Control (b:d.f 00:31.0 + 0xDC)
+    [00] BIOSWE           = 1 &lt;&lt; BIOS Write Enable 
+    [01] BLE              = 1 &lt;&lt; BIOS Lock Enable 
+    [02] SRC              = 3 &lt;&lt; SPI Read Configuration 
+    [04] TSS              = 1 &lt;&lt; Top Swap Status 
+    [05] SMM_BWP          = 1 &lt;&lt; SMM BIOS Write Protection 
+[-] BIOS region write protection is disabled!
+
+[*] BIOS Region: Base = 0x008FD000, Limit = 0x004E9FFF
+SPI Protected Ranges
+------------------------------------------------------------
+PRx (offset) | Value    | Base     | Limit    | WP? | RP?
+------------------------------------------------------------
+PR0 (74)     | 1175E938 | 00938000 | 01175FFF | 0   | 1 
+PR1 (78)     | 80BBD7B0 | 017B0000 | 000BBFFF | 1   | 1 
+PR2 (7C)     | FFBCE9F8 | 009F8000 | 01FBCFFF | 1   | 1 
+PR3 (80)     | BB80CC80 | 00C80000 | 01B80FFF | 1   | 1 
+PR4 (84)     | B6E9F889 | 01889000 | 016E9FFF | 1   | 1 
+
+[!] None of the SPI protected ranges write-protect BIOS region
+
+[!] BIOS should enable all available SMM based write protection mechanisms or configure SPI protected ranges to protect the entire BIOS region
+[-] FAILED: BIOS is NOT protected completely
+</system-out>
+		</testcase>
+	</testsuite>
+</testsuites>

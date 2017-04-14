@@ -630,19 +630,9 @@ class ChipsecMain:
         print "FFFF:"+str(failCount)
         return modules_failed
 
-# def main(argv=None):
-#     #chipsecMain = ChipsecMain( argv if argv else sys.argv[1:] )
-#     chipsecMain = ChipsecMain(['-i'])
-#     return chipsecMain.main()
-
-# if __name__ == "__main__":
-#     sys.exit( main() )
-
 def main(argv=None):
-
-    chipsecMain = ChipsecMain(['-i','-m','common.bios_wp','-j','s.json','-x','s.xml'])
+    chipsecMain = ChipsecMain( argv if argv else sys.argv[1:] )
     return chipsecMain.main()
 
 if __name__ == "__main__":
     sys.exit( main() )
-

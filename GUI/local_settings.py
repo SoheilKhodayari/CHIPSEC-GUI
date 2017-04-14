@@ -94,8 +94,22 @@ NODRIVER_MODE_LONG_MSG = "Equivalant to -n --no_driver commandline!"
 
 
 
-# ----------------------------------------------------------------------------- #
+# ------------------------------------------------------------------------------------------------- #
 #						Test Category Messages
+# ------------------------------------------------------------------------------------------------- #
+
+
+# @Warning:  Test Color Labels are pre-defined and their absolute text MUST NOT 
+#            be changed because the appropriate color is determined from the text.
+#            one can only use the following values:
+#			 1- RED          => Criticality HIGH 
+#			 2- ORANGE       => Criticality NORMAL 
+#			 3- ORANGE_LIGHT => Criticality LOW
+#			 4- YELLOW       => Criticality LOW
+#			 5- GREEN        => Not Critical
+
+# ----------------------------------------------------------------------------- #
+#						SPI Flash Controller Configuration Lock
 # ----------------------------------------------------------------------------- #
 
 FLOCKDN_COLOR_CODE = "RED"
@@ -103,4 +117,236 @@ FLOCKDN_CRITICALITY = "HIGH"
 FLOCKDN_EXPECTED_RESULT = "1"
 FLOCKDN_DESCRIPTION = "FLOCKDN description goes here\ndescription goes here" # use \n for newlines!
 FLOCKDN_REPR = "FLOCKDN"
-FLOCKDN_TEST_NAME = "SPI Flash Controller Configuration Lock"
+FLOCKDN_TEST_NAME = "SPI Flash Controller\nConfiguration Lock"
+
+# ----------------------------------------------------------------------------- #
+#					End SPI Flash Controller Configuration Lock
+# ----------------------------------------------------------------------------- #
+
+
+
+# ----------------------------------------------------------------------------- #
+#						SMI Events Configuration Options
+# ----------------------------------------------------------------------------- #
+
+
+SMM_BWP_2_COLOR_CODE = "ORANGE"
+SMM_BWP_2_CRITICALITY = "NORMAL"
+SMM_BWP_2_EXPECTED_RESULT = "1"
+SMM_BWP_2_DESCRIPTION = "SMM_BWP description goes here\ndescription goes here" # use \n for newlines!
+SMM_BWP_2_REPR = "SMM_BWP"
+SMM_BWP_2_TEST_NAME = "SMI Events Configuration"
+
+
+SMM_BWP_2_COLOR_CODE = "ORANGE"
+SMM_BWP_2_CRITICALITY = "NORMAL"
+SMM_BWP_2_EXPECTED_RESULT = "1"
+SMM_BWP_2_DESCRIPTION = "SMM_BWP description goes here\ndescription goes here" # use \n for newlines!
+SMM_BWP_2_REPR = "SMM_BWP"
+SMM_BWP_2_TEST_NAME = "SMI Events Configuration"
+
+
+TCO_SMI_LOCK_COLOR_CODE = "RED"
+TCO_SMI_LOCK_CRITICALITY = "HIGH"
+TCO_SMI_LOCK_EXPECTED_RESULT = "1"
+TCO_SMI_LOCK_DESCRIPTION = "TCO SMI configuration must\nbe locked (TCO SMI Lock)\ndescription goes here\ndescription goes here" # use \n for newlines!
+TCO_SMI_LOCK_REPR = "TCO SMI configuration (TCO SMI Lock)"
+TCO_SMI_LOCK_TEST_NAME = "SMI Events Configuration"
+
+SMI_LOCK_COLOR_CODE = "RED"
+SMI_LOCK_CRITICALITY = "HIGH"
+SMI_LOCK_EXPECTED_RESULT = "1"
+SMI_LOCK_DESCRIPTION = "SMI events global configuration\nmust be locked (SMI Lock)\ndescription goes here\ndescription goes here" # use \n for newlines!
+SMI_LOCK_REPR = "SMI events global configuration (SMI Lock)"
+SMI_LOCK_TEST_NAME = "SMI Events Configuration"
+
+
+Global_SMI_EN_COLOR_CODE = "GREEN"
+Global_SMI_EN_CRITICALITY = "Not Critical"
+Global_SMI_EN_EXPECTED_RESULT = "1"
+Global_SMI_EN_DESCRIPTION = "Global SMI Enable description goes here\ndescription goes here" # use \n for newlines!
+Global_SMI_EN_REPR = "Global SMI Enable"
+Global_SMI_EN_TEST_NAME = "SMI Events Configuration"
+
+
+TCO_SMI_EN_COLOR_CODE = "GREEN"
+TCO_SMI_EN_CRITICALITY = "Not Critical"
+TCO_SMI_EN_EXPECTED_RESULT = "1"
+TCO_SMI_EN_DESCRIPTION = "TCO SMI Enable (TCO1_CNT) description goes here\ndescription goes here" # use \n for newlines!
+TCO_SMI_EN_REPR = "TCO SMI Enable (TCO1_CNT)"
+TCO_SMI_EN_TEST_NAME = "SMI Events Configuration"
+
+
+
+# ----------------------------------------------------------------------------- #
+#					End	SMI Events Configuration Options
+# ----------------------------------------------------------------------------- #
+
+
+
+# ----------------------------------------------------------------------------- #
+#						BIOS Keyboard Buffer
+# ----------------------------------------------------------------------------- #
+
+
+BIOS_KEYBOARD_BUFF_COLOR_CODE = "ORANGE_LIGHT"
+BIOS_KEYBOARD_BUFF_CRITICALITY = "LOW"
+BIOS_KEYBOARD_BUFF_EXPECTED_RESULT = "Empty/Zero"
+BIOS_KEYBOARD_BUFF_DESCRIPTION = "BIOS Keyboard Buffer\ndescription goes here\ndescription goes here" # use \n for newlines!
+BIOS_KEYBOARD_BUFF_REPR = "BIOS Keyboard Buffer"
+BIOS_KEYBOARD_BUFF_TEST_NAME = "Pre-boot Passwords in\nthe BIOS Keyboard Buffer"
+
+
+
+# ----------------------------------------------------------------------------- #
+#						End BIOS Keyboard Buffer
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#					   BIOS Region Write Protection
+# ----------------------------------------------------------------------------- #
+
+
+BIOSWE_COLOR_CODE = "ORANGE_LIGHT"
+BIOSWE_CRITICALITY = "LOW"
+BIOSWE_EXPECTED_RESULT = "0"
+BIOSWE_DESCRIPTION = "BIOSWE description goes here\ndescription goes here" # use \n for newlines!
+BIOSWE_REPR = "BIOSWE"
+BIOSWE_TEST_NAME = "BIOS Region Write Protection"
+
+BLE_COLOR_CODE = "RED"
+BLE_CRITICALITY = "HIGH"
+BLE_EXPECTED_RESULT = "1"
+BLE_DESCRIPTION = "BLE description goes here\ndescription goes here" # use \n for newlines!
+BLE_REPR = "BLE"
+BLE_TEST_NAME = "BIOS Region Write Protection"
+
+SRC_COLOR_CODE = "GREEN"
+SRC_CRITICALITY = "Not Critical"
+SRC_EXPECTED_RESULT = "-"
+SRC_DESCRIPTION = "SRC description goes here\ndescription goes here" # use \n for newlines!
+SRC_REPR = "SRC"
+SRC_TEST_NAME = "BIOS Region Write Protection"
+
+TSS_COLOR_CODE = "ORANGE_LIGHT"
+TSS_CRITICALITY = "LOW"
+TSS_EXPECTED_RESULT = "0"
+TSS_DESCRIPTION = "TSS description goes here\ndescription goes here" # use \n for newlines!
+TSS_REPR = "TSS"
+TSS_TEST_NAME = "BIOS Region Write Protection"
+
+
+SMM_BWP_COLOR_CODE = "ORANGE"
+SMM_BWP_CRITICALITY = "NORMAL"
+SMM_BWP_EXPECTED_RESULT = "1"
+SMM_BWP_DESCRIPTION = "SMM_BWP description goes here\ndescription goes here" # use \n for newlines!
+SMM_BWP_REPR = "SMM_BWP"
+SMM_BWP_TEST_NAME = "BIOS Region Write Protection"
+
+
+
+# ----------------------------------------------------------------------------- #
+#						End BIOS Region Write Protection
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				 Compatible SMM memory (SMRAM) Protection
+# ----------------------------------------------------------------------------- #
+
+D_LCK_COLOR_CODE = "ORANGE"
+D_LCK_CRITICALITY = "NORMAL"
+D_LCK_EXPECTED_RESULT = "1"
+D_LCK_DESCRIPTION = "D_LCK_ description goes here\ndescription goes here" # use \n for newlines!
+D_LCK_REPR = "D_LCK_"
+D_LCK_TEST_NAME = "Compatible SMM memory\n(SMRAM) Protection"
+
+
+# ----------------------------------------------------------------------------- #
+#				End Compatible SMM memory (SMRAM) Protection
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				 Protected RTC Memory Locations
+# ----------------------------------------------------------------------------- #
+
+UE_COLOR_CODE = "YELLOW"
+UE_CRITICALITY = "LOW"
+UE_EXPECTED_RESULT = "1"
+UE_DESCRIPTION = "UE description goes here\ndescription goes here" # use \n for newlines!
+UE_REPR = "UE"
+UE_TEST_NAME = "Protected RTC\nMemory Locations"
+
+LL_COLOR_CODE = "YELLOW"
+LL_CRITICALITY = "LOW"
+LL_EXPECTED_RESULT = "1"
+LL_DESCRIPTION = "LL description goes here\ndescription goes here" # use \n for newlines!
+LL_REPR = "LL"
+LL_TEST_NAME = "Protected RTC\nMemory Locations"
+
+UL_COLOR_CODE = "YELLOW"
+UL_CRITICALITY = "LOW"
+UL_EXPECTED_RESULT = "1"
+UL_DESCRIPTION = "UL description goes here\ndescription goes here" # use \n for newlines!
+UL_REPR = "UL"
+UL_TEST_NAME = "Protected RTC\nMemory Locations"
+
+
+# ----------------------------------------------------------------------------- #
+#				 End Protected RTC Memory Locations
+# ----------------------------------------------------------------------------- #
+
+# ----------------------------------------------------------------------------- #
+#				IA32 Feature Control Lock
+# ----------------------------------------------------------------------------- #
+
+IA32_Lock_COLOR_CODE = "ORANGE_LIGHT"
+IA32_Lock_CRITICALITY = "NORMAL"
+IA32_Lock_EXPECTED_RESULT = "1"
+IA32_Lock_DESCRIPTION = "Lock description goes here\ndescription goes here" # use \n for newlines!
+IA32_Lock_REPR = "Lock"
+IA32_Lock_TEST_NAME = "IA32 Feature\nControl Lock"
+
+
+
+# ----------------------------------------------------------------------------- #
+#				End IA32 Feature Control Lock
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				SPI Flash Region Access Control
+# ----------------------------------------------------------------------------- #
+
+
+BBRA_BBWA_COLOR_CODE = "ORANGE_LIGHT"
+BBRA_BBWA_CRITICALITY = "NORMAL"
+BBRA_BBWA_EXPECTED_RESULT = "Passed"
+BBRA_BBWA_DESCRIPTION = "BBRA and BBWA \ndescription goes here\ndescription goes here" # use \n for newlines!
+BBRA_BBWA_REPR = "BBRA and BBWA"
+BBRA_BBWA_TEST_NAME = "SPI Flash Region\nAccess Control"
+
+
+
+# ----------------------------------------------------------------------------- #
+#				End SPI Flash Region Access Control
+# ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				SPI Flash Descriptor Security Override Pin-Strap
+# ----------------------------------------------------------------------------- #
+
+FDOPSS_COLOR_CODE = "RED"
+FDOPSS_CRITICALITY = "HIGH"
+FDOPSS_EXPECTED_RESULT = "1"
+FDOPSS_DESCRIPTION = "FDOPSS \ndescription goes here\ndescription goes here" # use \n for newlines!
+FDOPSS_REPR = "FDOPSS"
+FDOPSS_TEST_NAME = "SPI Flash Descriptor \nSecurity Override Pin-Strap"
+
+
+# ----------------------------------------------------------------------------- #
+#				End SPI Flash Descriptor Security Override Pin-Strap
+# ----------------------------------------------------------------------------- #
