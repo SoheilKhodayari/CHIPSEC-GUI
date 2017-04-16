@@ -13,12 +13,16 @@ from utils import _sudo_exec, _makeFile
 class Main(QtGui.QMainWindow):
 
     def __init__(self, appModel):
+
         super(Main, self).__init__()
         self.setMinimumWidth(1200)
         self.setMinimumHeight(600)
+
+        # @Note
         # appModel is "py" or "pyc", fetched from argv
         # this will determine how to treat other python file extentions
         self.appModel = appModel  
+
         self._initUI()
 
     def _initUI(self):
@@ -33,7 +37,6 @@ class Main(QtGui.QMainWindow):
         scrollArea = QScrollArea()
         self.console = embeddedTerminal(self)
         scrollArea.setWidget(self.console)
-        #scrollArea.setFixedSize(550,310)  # set this to make console bigger
         scrollArea.setFixedSize(550,200)
 
         scrollArea2 = QScrollArea()
@@ -41,7 +44,6 @@ class Main(QtGui.QMainWindow):
         scrollArea2.setWidget(self.termianlTextEdit)
         scrollArea2.setWidgetResizable(True)
         scrollArea2.setFixedSize(550,200)
-        #self.termianlTextEdit.setFixedSize(500,300)
         self.termianlTextEdit.setFixedSize(500,200)
         self.termianlTextEdit.setReadOnly(True)
         self.termianlTextEdit.setStyleSheet("color: white; background-color: #0D0C0C;")
@@ -135,7 +137,6 @@ class Main(QtGui.QMainWindow):
 
 def main(argv=None):
     
-    #QtGui.QApplication.setStyle(QtGui.QStyleFactory.create('SGI'))
     QtGui.QApplication.setStyle(QtGui.QStyleFactory.create('CleanLooks'))
     app = QtGui.QApplication(sys.argv)
     app.setWindowIcon(QtGui.QIcon('icons/cr2.png'))

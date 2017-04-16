@@ -166,6 +166,11 @@ class PythonThread (QtCore.QThread):
 				tseg_1_res = test_14_res_list[0]
 				smrr_range_res = test_14_res_list[1]
 				results+=[tseg_1_res,smrr_range_res]
+			elif test == "s3bootscript":
+				#test 15
+				s3bootscript_res = self.S3_Boot_Script(stderrAsList)
+				dispatch_opcodes_res = self.Dispatch_Opcodes(stderrAsList)
+				results+=[s3bootscript_res,dispatch_opcodes_res]
 
 		self.outputData = results
 
@@ -1299,22 +1304,68 @@ class PythonThread (QtCore.QThread):
         return [res1, res2]
         
 
-    # def SMRR_range(self, stderrList):
-    # 	pass
 
-    def BLE_1(self, stderrList):
-    	pass
+# ----------------------------------------------------------------------------- #
+#				S3 Resume Boot-Script Protections
+# ----------------------------------------------------------------------------- #
+    def S3_Boot_Script(self, stderrList):
+	    	"""
+				 S3 Resume Boot-Script Protections -/common/uefi/s3bootscript.py
+	    	"""
+	    	item = 'UNKNOWN'
+	    	msg_failure_1 = "S3 Boot-Script and Dispatch entry-points do not appear to be protected"
+	    	msg_failure_2 = "S3 Boot-Script is not in SMRAM but Dispatch entry-points appear to be protected. Recommend further testing"
+	    	msg_success = "S3 Boot-Script is inside SMRAM. The script is protected but Dispatch opcodes cannot be inspected"
+	    	for line in stderrList:
+	    		if (msg_failure_1 in line) or (msg_failure_2 in line):
+	    				item = "Unprotected"
+	    				break
+	    		elif msg_success in line:
+	    				item = "Protected"
+	    				break
 
-    def BLE_2(self, stderrList):
-    	pass
+	    	res =   [S3_BootScript_COLOR_CODE,
+	    		    S3_BootScript_CRITICALITY,
+	    		    S3_BootScript_EXPECTED_RESULT,
+	    		    item,
+	    		    S3_BootScript_DESCRIPTION,
+	    		    S3_BootScript_REPR,
+	    		    S3_BootScript_TEST_NAME]
+	        return res
+    def Dispatch_Opcodes(self, stderrList):
+	    	"""
+				 S3 Resume Boot-Script Protections -/common/uefi/s3bootscript.py
+	    	"""
+	    	item = 'UNKNOWN'
+	    	msg_failure = "S3 Boot-Script and Dispatch entry-points do not appear to be protected"
+	    	msg_success = "S3 Boot-Script is not in SMRAM but Dispatch entry-points appear to be protected. Recommend further testing"
+	    	msg_state_unknown_dispatch = "S3 Boot-Script is inside SMRAM. The script is protected but Dispatch opcodes cannot be inspected"
+	    	for line in stderrList:
+	    		if (msg_failure in line):
+	    				item = "Unprotected"
+	    				break
+	    		elif msg_success in line:
+	    				item = "Protected"
+	    				break
+	    		elif msg_state_unknown_dispatch in line:
+	    				item = "UNKNOWN,\nDispatch Opcodes\nCan not be\ninspected"
+	    				break
 
-    def TSEG_2(self, stderrList):
-    	pass
-
-
-
+	    	res =   [Dispatch_Opcodes_COLOR_CODE,
+	    		    Dispatch_Opcodes_CRITICALITY,
+	    		    Dispatch_Opcodes_EXPECTED_RESULT,
+	    		    item,
+	    		    Dispatch_Opcodes_DESCRIPTION,
+	    		    Dispatch_Opcodes_REPR,
+	    		    Dispatch_Opcodes_TEST_NAME]
+	        return res
 
 
 # ----------------------------------------------------------------------------- #
+#				SMM TSEG Range Configuration Check
+# ----------------------------------------------------------------------------- #
+
+
+# ------------------------------------------------------------------------------------------------- #
 #				End Runnable QThread For Parsing Test Output
-# ----------------------------------------------------------------------------- #
+# ------------------------------------------------------------------------------------------------- #

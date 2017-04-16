@@ -632,3 +632,28 @@ SMRR_Range_TEST_NAME = "SMM TSEG Range\nConfiguration Check"
 # ----------------------------------------------------------------------------- #
 #				 End SMM TSEG Range Configuration Check
 # ----------------------------------------------------------------------------- #
+
+
+# ----------------------------------------------------------------------------- #
+#				S3 Resume Boot-Script Protections
+# ----------------------------------------------------------------------------- #
+
+
+S3_BootScript_COLOR_CODE = "RED"
+S3_BootScript_CRITICALITY = "HIGH"
+S3_BootScript_EXPECTED_RESULT = "Protected"
+S3_BootScript_DESCRIPTION = "S3 Boot-Script \ndescription goes here\ndescription goes here" # use \n for newlines!
+S3_BootScript_REPR = "S3 Boot-Script"
+S3_BootScript_TEST_NAME = "S3 Resume Boot-Script\nProtections"
+
+
+Dispatch_Opcodes_COLOR_CODE = "ORANGE"
+Dispatch_Opcodes_CRITICALITY = "NORMAL"
+Dispatch_Opcodes_EXPECTED_RESULT = "Protected"
+Dispatch_Opcodes_DESCRIPTION = "Dispatch Opcodes \ndescription goes here\ndescription goes here" # use \n for newlines!
+Dispatch_Opcodes_REPR = "Entry-Point of\nDispatch Opcodes"
+Dispatch_Opcodes_TEST_NAME = "S3 Resume Boot-Script\nProtections"
+
+# ----------------------------------------------------------------------------- #
+#				SMM TSEG Range Configuration Check
+# ----------------------------------------------------------------------------- #
