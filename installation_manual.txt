@@ -1,3 +1,26 @@
+
+
+#-------------------------------------------------------------------------#
+#				How to Make Byte Code and Deliver 
+#-------------------------------------------------------------------------#
+
+one level above the top directory, where there is a chipsec file, do:
+
+python python -m compileall <directory>
+
+where <directory> is chipsec in our case
+
+then cd to /GUI directory and delete py files, do:
+
+find . -name \*.py -delete
+
+
+#-------------------------------------------------------------------------#
+#				End How to Make Byte Code and Deliver 
+#-------------------------------------------------------------------------#
+
+
+
 ===========arbitary
 make runnable script by double click
 
@@ -95,7 +118,8 @@ sudo python chipsec_main.py
 
 ========== AFTER CHIPSEC INSTALLATION, DO:
 
-
+# xlwt
+sudo pip install xlwt
 
 # install pyqt4
 sudo apt-get install python-qt4
