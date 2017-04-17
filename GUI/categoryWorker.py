@@ -8,7 +8,7 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import Qt
 from utils import _sudo_exec
 from local_settings import *
-from local_settings import ROOT_PASSWORD
+from local_settings import ROOT_PASSWORD, TEST_RESULT_TABLE_HEADERS
 
 # ----------------------------------------------------------------------------- #
 #						   Category Table Class
@@ -48,7 +48,7 @@ class categoryTable(QtGui.QTableWidget):
                 	elif cell_data == "GREEN":
                 		self.item(i,j).setBackground(QtGui.QColor(0,204,0))
 
-		self.setHorizontalHeaderLabels(['Color Code','Criticality','Expected Result','Test Result','Test Description','Option Under Test','Test Name'])
+		self.setHorizontalHeaderLabels(TEST_RESULT_TABLE_HEADERS)
 
 
 

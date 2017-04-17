@@ -29,7 +29,7 @@ class Main(QtGui.QMainWindow):
     def _initUI(self):
 
         self.center()
-        self.setWindowTitle('Platform Security Assessment Framework')
+        self.setWindowTitle(MAIN_WINDOW_APP_TITLE)
 
         self.mainLayout = QVBoxLayout()
 
@@ -45,7 +45,7 @@ class Main(QtGui.QMainWindow):
         self.scrollArea2.setWidget(self.termianlTextEdit)
         self.scrollArea2.setWidgetResizable(True)
         self.scrollArea2.setFixedSize(550,200)
-        self.termianlTextEdit.setFixedSize(500,200)
+        self.termianlTextEdit.setFixedSize(900,200)
         self.termianlTextEdit.setReadOnly(True)
         self.termianlTextEdit.setStyleSheet("color: white; background-color: #0D0C0C;")
 

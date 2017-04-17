@@ -2,6 +2,7 @@
 import os 
 
 
+MAIN_WINDOW_APP_TITLE = u'Platform Security Assessment Framework'
 
 # ----------------------------------------------------------------------------- #
 #						OS ROOT PASSWORD
@@ -63,6 +64,10 @@ TEST_DIRECTIORY_LIST = [COMMON_DIR,SECURE_BOOT_DIR,UEFI_DIR,OTHER_MODULES_DIR]
 # to use below lisr instead, pass true to _fetch_test_suite_list() function.
 # below list is not used by default
 AVAILABLE_TESTS = QRY_MODULE_PATH.keys()
+
+
+
+
 
 # ----------------------------------------------------------------------------- #
 #						APP MSG, ERRORS, ETC
@@ -158,6 +163,11 @@ NODRIVER_MODE_LONG_MSG = "Equivalant to -n --no_driver commandline!"
 # ------------------------------------------------------------------------------------------------- #
 
 
+# Test Result Table Headers
+TEST_RESULT_TABLE_HEADERS = ['Color Code','Criticality','Expected Result','Test Result','Test Description','Option Under Test','Test Name']
+
+
+
 # @Warning:  Test Color Labels are pre-defined and their absolute text MUST NOT 
 #            be changed because the appropriate color is determined from the text.
 #            one can only use the following values:
@@ -166,6 +176,8 @@ NODRIVER_MODE_LONG_MSG = "Equivalant to -n --no_driver commandline!"
 #			 3- ORANGE_LIGHT => Criticality LOW
 #			 4- YELLOW       => Criticality LOW
 #			 5- GREEN        => Not Critical
+
+
 
 # ----------------------------------------------------------------------------- #
 #						SPI Flash Controller Configuration Lock

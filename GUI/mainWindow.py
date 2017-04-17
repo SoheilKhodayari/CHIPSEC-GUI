@@ -659,7 +659,11 @@ class mainWindow(QtGui.QWidget):
 		cmd_tmux = cmd[0]
 		cmd_cat = cmd[1]  #absoulue module path
 		self._generate_categorize_output_main(cmd_cat)
+		self.parent._writeOutputInSecondTerminal("\n++[Summary Generation In Progress] Please wait ...\n\n")
+		QtCore.QTimer.singleShot(2000, lambda cm=cmd_tmux: self._run_tmux_command_with_delay(cm))
 
+
+	def _run_tmux_command_with_delay(self, cmd_tmux):
 		if ENV == 'LIVE':
 			self.parent.console.runCommand(cmd_tmux, False)
 		else:	
@@ -668,8 +672,6 @@ class mainWindow(QtGui.QWidget):
 				self.parent.console.runCommand(cmd_tmux, True)
 			else:
 				self.parent.console.runCommand(cmd_tmux, False)
-
-		self.parent._writeOutputInSecondTerminal("\n++[Summary Generation In Progress] Please wait ...\n\n")
 
 	def _open_browse_select_other_test(self):
 		diag = QFileDialog()
