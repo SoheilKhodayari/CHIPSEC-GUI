@@ -16,10 +16,11 @@ class Main(QtGui.QMainWindow):
 
         super(Main, self).__init__()
         self.setMinimumWidth(1200)
-        self.setMinimumHeight(600)
+        #self.setMinimumHeight(600)
+        self.setMinimumHeight(450)
 
         # @Note
-        # appModel is "py" or "pyc", fetched from argv
+        # appModel is "py" or "pyc", f\etched from argv
         # this will determine how to treat other python file extentions
         self.appModel = appModel  
 
@@ -30,37 +31,40 @@ class Main(QtGui.QMainWindow):
         self.center()
         self.setWindowTitle('Platform Security Assessment Framework')
 
-        mainLayout = QVBoxLayout()
+        self.mainLayout = QVBoxLayout()
 
         self.widget=mainWindow(self)
 
-        scrollArea = QScrollArea()
+        self.scrollArea = QScrollArea()
         self.console = embeddedTerminal(self)
-        scrollArea.setWidget(self.console)
-        scrollArea.setFixedSize(550,200)
+        self.scrollArea.setWidget(self.console)
+        self.scrollArea.setFixedSize(550,200)
 
-        scrollArea2 = QScrollArea()
+        self.scrollArea2 = QScrollArea()
         self.termianlTextEdit = QTextEdit()
-        scrollArea2.setWidget(self.termianlTextEdit)
-        scrollArea2.setWidgetResizable(True)
-        scrollArea2.setFixedSize(550,200)
+        self.scrollArea2.setWidget(self.termianlTextEdit)
+        self.scrollArea2.setWidgetResizable(True)
+        self.scrollArea2.setFixedSize(550,200)
         self.termianlTextEdit.setFixedSize(500,200)
         self.termianlTextEdit.setReadOnly(True)
         self.termianlTextEdit.setStyleSheet("color: white; background-color: #0D0C0C;")
 
 
-        terminalsHorizonalPane = QHBoxLayout()
-        terminalsHorizonalPane.addWidget(scrollArea)
-        terminalsHorizonalPane.addWidget(scrollArea2)
+        self.terminalsHorizonalPane = QHBoxLayout()
+        self.terminalsHorizonalPane.addWidget(self.scrollArea)
+        self.terminalsHorizonalPane.addWidget(self.scrollArea2)
 
 
-        mainLayout.addWidget(self.widget)
-        mainLayout.addLayout(terminalsHorizonalPane)
-        mainWidget = QWidget(self)
-        mainWidget.setLayout(mainLayout)
+        self.mainLayout.addWidget(self.widget)
+        self.mainLayout.addLayout(self.terminalsHorizonalPane)
+        self.mainWidget = QWidget(self)
+        self.mainWidget.setLayout(self.mainLayout)
 
 
-        self.setCentralWidget(mainWidget)
+        self.setCentralWidget(self.mainWidget)
+
+        self.scrollArea.hide()
+        self.scrollArea2.hide()
 
         self.makeMenu()
         self.show()
@@ -102,13 +106,31 @@ class Main(QtGui.QMainWindow):
         summaryAction.setStatusTip('Test Summary Window')
         summaryAction.triggered.connect(self._render_test_summary_window_now)
 
+        iconShowConsole= QtGui.QIcon('icons/autopilot.png')
+        self.showConsoleAction = QtGui.QAction(iconShowConsole, '&Show Console', self, checkable= True)
+        self.showConsoleAction.setShortcut('Ctrl+W')
+        self.showConsoleAction.setStatusTip('Show Console Window')
+        self.showConsoleAction.triggered.connect(self._show_or_hide_terminal)
 
         menubar = QtGui.QMenuBar(self)
         menubar.setGeometry(QtCore.QRect(0, 0, 2000, 23))
         menufile = menubar.addMenu('File')
 
         menufile.addAction(summaryAction)
+        menufile.addAction(self.showConsoleAction)
         menufile.addAction(exitAction)
+
+    def _show_or_hide_terminal(self):
+
+        if self.showConsoleAction.isChecked():
+            self.resize(1200,600)
+            self.scrollArea2.show()
+            self.scrollArea.show()
+        else:
+            self.resize(1200,450)
+            self.scrollArea2.hide()
+            self.scrollArea.hide()
+
 
 
     def _render_test_summary_window_now(self):
@@ -127,7 +149,6 @@ class Main(QtGui.QMainWindow):
 
         stdouterr = _sudo_exec(command, ROOT_PASSWORD)
         self._writeOutputInSecondTerminal(stdouterr)
-        #_makeFile(stdouterr)
 
     def runCommandInFirstTerminal(self,command):
         self.console.runCommand(command)

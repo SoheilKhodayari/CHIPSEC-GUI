@@ -11,7 +11,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtCore import Qt
-from utils import _sudo_exec 
+from utils import _sudo_exec, exec_with_user_privilige
 from local_settings import AVAILABLE_TESTS, TEST_TOOL_TIPS,DETAILED_TEST_TOOL_TIPS
 from local_settings import VERBOSE_MODE_SHORT_MSG, VERBOSE_MODE_LONG_MSG, \
 						   DEBUG_MODE_SHORT_MSG, DEBUG_MODE_LONG_MSG, \
@@ -21,7 +21,7 @@ from local_settings import VERBOSE_MODE_SHORT_MSG, VERBOSE_MODE_LONG_MSG, \
 						   NODRIVER_MODE_SHORT_MSG, NODRIVER_MODE_LONG_MSG, \
 						   ADDITIONAL_TEST_I_SHORT_MSG, ADDITIONAL_TEST_I_LONG_MSG, \
 						   ADDITIONAL_TEST_USAGE_MESSAGE, REPORT_PATH, ROOT_PASSWORD, \
-						   BASE_PATH, QRY_MODULE_PATH, TEST_DIRECTIORY_LIST
+						   BASE_PATH, QRY_MODULE_PATH, TEST_DIRECTIORY_LIST, ENV
 
 from categoryWorker import *
 
@@ -616,12 +616,23 @@ class mainWindow(QtGui.QWidget):
 
 
 		# --- build the cmd from switch_dict---------------------------------------
+		env = ENV
 		if self.parent.get_app_model() == "pyc":
-			sudo_cmd_base = "sudo python ../gui_api.pyc"
-			sudo_cmd_category = "sudo python {0}/gui_api.pyc".format(abs_path_chipsec)
+			# better to use sudo chipsec_main than to build external 
+			# in the live mode.
+			if False: #env == "LIVE":
+				sudo_cmd_base = "sudo chipsec_main"
+				sudo_cmd_category = "sudo chipsec_main"
+			else:
+				sudo_cmd_base = "sudo python ../gui_api.pyc"
+				sudo_cmd_category = "sudo python {0}/gui_api.pyc".format(abs_path_chipsec)
 		else:
-			sudo_cmd_base = "sudo python ../gui_api.py"
-			sudo_cmd_category = "sudo python {0}/gui_api.py".format(abs_path_chipsec)
+			if False: #env == "LIVE":
+				sudo_cmd_base = "sudo chipsec_main"
+				sudo_cmd_category = "sudo chipsec_main"
+			else:
+				sudo_cmd_base = "sudo python ../gui_api.py"
+				sudo_cmd_category = "sudo python {0}/gui_api.py".format(abs_path_chipsec)
 		for key in switch_dict:
 			if switch_dict[key]!="":
 				tmp = " {0} {1}".format(key,switch_dict[key])
@@ -646,17 +657,19 @@ class mainWindow(QtGui.QWidget):
 			return None
 
 		cmd_tmux = cmd[0]
-		cmd_cat = cmd[1]
+		cmd_cat = cmd[1]  #absoulue module path
 		self._generate_categorize_output_main(cmd_cat)
 
-		if self._first_run_done == False:
-			self._first_run_done = True
-			self.parent.console.runCommand(cmd_tmux, True)
-		else:
+		if ENV == 'LIVE':
 			self.parent.console.runCommand(cmd_tmux, False)
+		else:	
+			if self._first_run_done == False:
+				self._first_run_done = True
+				self.parent.console.runCommand(cmd_tmux, True)
+			else:
+				self.parent.console.runCommand(cmd_tmux, False)
 
 		self.parent._writeOutputInSecondTerminal("\n++[Summary Generation In Progress] Please wait ...\n\n")
-		
 
 	def _open_browse_select_other_test(self):
 		diag = QFileDialog()
@@ -751,7 +764,14 @@ class mainWindow(QtGui.QWidget):
   		self.test_summary_widget.setMinimumWidth(1000)
   		self.test_summary_widget.setMinimumHeight(600)
 
-  		# return if there is a test which there is nothing to show for in the table widget
+  		if thread.stderrData is not None:
+  			self.parent._writeOutputInSecondTerminal(thread.stderrData)
+  		else:
+  			self.parent._writeOutputInSecondTerminal(">> Log not available! Please run the tests again...")
+  		if thread.outputData is None:
+  			return None
+
+  		# return if there is a test which there is nothing to show for in the table widget	
   		if len(thread.outputData) == 0:
   			return None   
 		table = categoryTable(thread.outputData)

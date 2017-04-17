@@ -11,6 +11,15 @@ import os
 ROOT_PASSWORD = "9759865"
 
 
+
+#@Note
+# There is no root password in live mode
+# But root password is required in a non-live mode
+# use LIVE  or NON-LIVE  as the value for ENV variable
+ENV = "LIVE"  #ENV = "NON-LIVE"
+
+
+
 # ----------------------------------------------------------------------------- #
 #						APP SETTING
 # ----------------------------------------------------------------------------- #

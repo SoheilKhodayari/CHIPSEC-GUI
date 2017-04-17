@@ -63,6 +63,7 @@ class PythonThread (QtCore.QThread):
         self.cmdline = cmdline
         self.test_suite = test_suite
         self.outputData = None
+        self.stderrData = None
 
     def __del__(self):
     	self.wait()
@@ -72,6 +73,7 @@ class PythonThread (QtCore.QThread):
 
     def run(self):
 		stderr = _sudo_exec(self.cmdline, ROOT_PASSWORD)
+                self.stderrData = stderr
 		stderrAsList = stderr.split('\r\n')
 		results = []
 
