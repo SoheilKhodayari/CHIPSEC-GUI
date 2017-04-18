@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------- #
 #						     Import Libaries
 # ----------------------------------------------------------------------------- #
@@ -31,7 +31,7 @@ class categoryTable(QtGui.QTableWidget):
 
         for i in range(self.rows):
             for j in range(self.cols):
-            	cell_data = str(self.data[i][j])
+            	cell_data = self.data[i][j]
                 newitem = QtGui.QTableWidgetItem(cell_data)	
                 self.setItem(i,j,newitem)
 

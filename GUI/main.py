@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -76,8 +76,8 @@ class Main(QtGui.QMainWindow):
 
     def closeEvent(self, event):
 
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to Exit?", QtGui.QMessageBox.Yes |
+        reply = QtGui.QMessageBox.question(self, u'Message',
+            u" اطمینان دارید که میخواهید خارج شوید؟", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
         if reply == QtGui.QMessageBox.Yes:
@@ -95,26 +95,26 @@ class Main(QtGui.QMainWindow):
 
     def makeMenu(self):
         iconExit = QtGui.QIcon('icons/exit.png')
-        exitAction = QtGui.QAction(iconExit, '&Exit', self)
+        exitAction = QtGui.QAction(iconExit, u'خروج', self)
         exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')
+        exitAction.setStatusTip(u'خروج از برنامه')
         exitAction.triggered.connect(self.close)
 
         iconTestSummary = QtGui.QIcon('icons/attach.png')
-        summaryAction = QtGui.QAction(iconTestSummary, '&Test Summary', self)
+        summaryAction = QtGui.QAction(iconTestSummary, u'نتیجه تست', self)
         summaryAction.setShortcut('Ctrl+D')
-        summaryAction.setStatusTip('Test Summary Window')
+        summaryAction.setStatusTip(u'پنجره نتیجه تست')
         summaryAction.triggered.connect(self._render_test_summary_window_now)
 
         iconShowConsole= QtGui.QIcon('icons/autopilot.png')
-        self.showConsoleAction = QtGui.QAction(iconShowConsole, '&Show Console', self, checkable= True)
+        self.showConsoleAction = QtGui.QAction(iconShowConsole, u'مشاهده ترمینال', self, checkable= True)
         self.showConsoleAction.setShortcut('Ctrl+W')
-        self.showConsoleAction.setStatusTip('Show Console Window')
+        self.showConsoleAction.setStatusTip(u'مشاهده ترمینال')
         self.showConsoleAction.triggered.connect(self._show_or_hide_terminal)
 
         menubar = QtGui.QMenuBar(self)
         menubar.setGeometry(QtCore.QRect(0, 0, 2000, 23))
-        menufile = menubar.addMenu('File')
+        menufile = menubar.addMenu(u'منو برنامه')
 
         menufile.addAction(summaryAction)
         menufile.addAction(self.showConsoleAction)

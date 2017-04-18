@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------- #
 #						     Import Libraries
 # ----------------------------------------------------------------------------- #
@@ -67,11 +68,12 @@ class TestCaseRow(QtGui.QWidget):
 		msg.setIcon(QMessageBox.Information)
 
 		if testName == "--Other--":
-			msg.setText("check this box to run another test of your own.") 
+			msg.setText(u"برای انتخاب تست دلخواه خود این گزینه را فعال کنید.") 
 		else:
-			msg.setText("This is {0} tool tip message box.".format(testName))
+			#msg.setText("This is {0} tool tip message box.".format(testName))
+			msg.setText(u" {0} اطلاعات بیشتر در مورد".format(testName))
 		msg.setInformativeText(descShort)
-		msg.setWindowTitle("Help")
+		msg.setWindowTitle(u"راهنما")
 		msg.setDetailedText(descDetailed)
 
 		msg.setStandardButtons(QMessageBox.Ok) # | QMessageBox.Cancel
@@ -194,7 +196,7 @@ class mainWindow(QtGui.QWidget):
 			rowWidget.checkBox.stateChanged.connect(lambda checked, r=rowWidget: self._on_test_suite_item_state_changed(checked, r))
 
 
-		self.OtherTestRowWidget = TestCaseRow("<< OTHER TEST >>","--Other--","test file must be set on the right-hand side window",ADDITIONAL_TEST_I_LONG_MSG)
+		self.OtherTestRowWidget = TestCaseRow("<< OTHER TEST >>","--Other--",u"فایل تست خود را باید در بخش کناری قرار دهید!",ADDITIONAL_TEST_I_LONG_MSG)
 		self._test_case_row_widgets.append(self.OtherTestRowWidget)
 		vlay.addWidget(self.OtherTestRowWidget)
 		self.OtherTestRowWidget.checkBox.stateChanged.connect(lambda checked: self._on_test_suite_item_state_changed(checked, self.OtherTestRowWidget))
@@ -224,8 +226,8 @@ class mainWindow(QtGui.QWidget):
 
 		# -- create Hboxes and add to OverallQVLayoutNearTestSuite as a row
 		self._enable_output_save_lbl = QtGui.QLabel()
-		self._enable_output_save_lbl.setText("Save Terminal Output:")
-		self._enable_output_save_lbl.setFixedWidth(135)
+		self._enable_output_save_lbl.setText(u"ذخیره خروجی ترمینال")
+		self._enable_output_save_lbl.setFixedWidth(120)
 		self._enable_output_save_chkbox = QtGui.QCheckBox()
 		QHRow1 = QtGui.QHBoxLayout()
 		QHRow1.addWidget(self._enable_output_save_lbl)
@@ -233,20 +235,20 @@ class mainWindow(QtGui.QWidget):
 
 
 		self._test_save_output_type_lbl = QtGui.QLabel()
-		self._test_save_output_type_lbl.setText("Output Type:")
-		self._test_save_output_type_lbl.setFixedWidth(80)
+		self._test_save_output_type_lbl.setText(u"نوع فایل خروجی")
+		self._test_save_output_type_lbl.setFixedWidth(90)
 		self._test_save_output_type_combo = QtGui.QComboBox()
 		self._test_save_output_type_combo.addItems([".xml",".txt"])
-		self._test_save_output_type_combo.setFixedWidth(80)
+		self._test_save_output_type_combo.setFixedWidth(84)
 		QHRow2 = QtGui.QHBoxLayout()
 		QHRow2.setAlignment(QtCore.Qt.AlignLeft)
 		QHRow2.addWidget(self._test_save_output_type_lbl)
 		QHRow2.addWidget(self._test_save_output_type_combo)
 
 		self._save_output_dir_lbl = QtGui.QLabel()
-		self._save_output_dir_lbl.setText("Saving Directory:")
+		self._save_output_dir_lbl.setText(u"آدرس  ذخیره سازی")
 		self._save_output_dir_lbl.setFixedWidth(110)
-		self._save_output_dir_btn = QtGui.QPushButton("Browse",self)
+		self._save_output_dir_btn = QtGui.QPushButton(u"انتخاب",self)
 		self._save_output_dir_btn.clicked.connect(self._open_browse_save_output_dir)
 		self._save_output_dir_le = QtGui.QLineEdit()
 		self._save_output_dir_le.setReadOnly(True)
@@ -271,7 +273,7 @@ class mainWindow(QtGui.QWidget):
 
 		# -- select OTHER test files (browse test files)
 		self._other_test_lbl = QtGui.QLabel()
-		self._other_test_lbl.setText("Additional Tests:")
+		self._other_test_lbl.setText(u":سایر تست ها")
 		self._other_test_i_btn = QtGui.QPushButton("i", self)
 		self._other_test_i_btn.setFixedSize(15,18)
 		self._other_test_i_btn.clicked.connect(lambda c,m=ADDITIONAL_TEST_USAGE_MESSAGE, s=ADDITIONAL_TEST_I_SHORT_MSG, l=ADDITIONAL_TEST_I_LONG_MSG : self._show_msg_dialog(m,s,l))
@@ -281,7 +283,7 @@ class mainWindow(QtGui.QWidget):
 		QHRow6.addWidget(self._other_test_i_btn)
 
 
-		self._other_test_browse_btn = QtGui.QPushButton("Browse",self)
+		self._other_test_browse_btn = QtGui.QPushButton(u"انتخاب",self)
 		self._other_test_browse_btn.clicked.connect(self._open_browse_select_other_test)
 		self._other_test_browse_le = QtGui.QLineEdit()
 		self._other_test_browse_le.setReadOnly(True)
@@ -294,9 +296,9 @@ class mainWindow(QtGui.QWidget):
 
 
 		self._execute_test_lbl = QtGui.QLabel()
-		self._execute_test_lbl.setText("Run Test(s):")
-		self._execute_test_lbl.setFixedWidth(80)
-		self._execute_test_btn = QtGui.QPushButton("Run Now")
+		self._execute_test_lbl.setText(u":اجرای تست(ها)")
+		self._execute_test_lbl.setFixedWidth(84)
+		self._execute_test_btn = QtGui.QPushButton(u"اجرا")
 		self._execute_test_btn.clicked.connect(self._on_execute_test_btn_clicked)
 
 		QHRow9 = QtGui.QHBoxLayout()
@@ -492,8 +494,8 @@ class mainWindow(QtGui.QWidget):
 		self.v.addLayout(self.TestSuiteOverallLayout2)
 
 		# -- setup group --------------------------------------------#
-		self.group=QtGui.QGroupBox('Test Selection')
-		self.groupOptions=QtGui.QGroupBox('Test Settings')
+		self.group=QtGui.QGroupBox(u'انتخاب آزمون')
+		self.groupOptions=QtGui.QGroupBox(u'تنظمیات اجرایی')
 		self.groupOptions.setLayout(settingVLayout)
 		self.group.setLayout(self.v)
 		self.Vbox=QtGui.QVBoxLayout()
@@ -530,7 +532,7 @@ class mainWindow(QtGui.QWidget):
 		if descShort == ADDITIONAL_TEST_I_SHORT_MSG:
 			msg.setText(message)
 		else:
-			msg.setText("This is {0} tool tip info box.".format(message))
+			msg.setText("{0}".format(message))
 		msg.setInformativeText(descShort)
 		msg.setWindowTitle("Info")
 		msg.setDetailedText(descDetailed)
@@ -763,6 +765,7 @@ class mainWindow(QtGui.QWidget):
 
   	def _on_thread_task_finished(self, thread):
   		self.test_summary_widget =  QtGui.QDialog(self)
+  		self.test_summary_widget.setWindowTitle("Summary")
   		self.test_summary_widget.setMinimumWidth(1000)
   		self.test_summary_widget.setMinimumHeight(600)
 
@@ -785,26 +788,26 @@ class mainWindow(QtGui.QWidget):
 
   		# -- top bar panel
 		iconExit = QtGui.QIcon('icons/exit.png')
-		exitAction = QtGui.QAction(iconExit, '&Exit', self)
-		exitAction.setShortcut('Ctrl+Q')
-		exitAction.setStatusTip('Exit application')
+		exitAction = QtGui.QAction(iconExit, u'خروج', self)
+		exitAction.setShortcut('Ctrl+L')
+		exitAction.setStatusTip(u'exit application')
 		exitAction.triggered.connect(self.test_summary_widget.close)
 
 		iconSave = QtGui.QIcon('icons/borrow.jpg')
-		saveAction = QtGui.QAction(iconSave, '&Save', self)
+		saveAction = QtGui.QAction(iconSave, u'ذخیره نتیجه', self)
 		saveAction.setShortcut('Ctrl+S')
 		saveAction.setStatusTip('Save Output')
 		saveAction.triggered.connect(lambda celf, tb=table, wi=self.test_summary_widget: self._on_save_test_category_output(tb,wi))
 
 		iconScreen = QtGui.QIcon('icons/borrow.jpg')
-		shotAction = QtGui.QAction(iconScreen, '&ScreenShot', self)
+		shotAction = QtGui.QAction(iconScreen, u'screenshot', self)
 		shotAction.setShortcut('Ctrl+P')
-		shotAction.setStatusTip('Take ScreenShot')
+		shotAction.setStatusTip('screenShot')
 		shotAction.triggered.connect(lambda celf, tb=table, wi=self.test_summary_widget: self._on_capture_screenshot(tb,wi))
 
 		menubar = QtGui.QMenuBar(self)
 		menubar.setGeometry(QtCore.QRect(0, 0, 2000, 23))
-		menufile = menubar.addMenu('File')
+		menufile = menubar.addMenu(u'فایل')
 
 		menufile.addAction(saveAction)
 		menufile.addAction(shotAction)

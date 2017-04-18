@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import platform, os, logging
 import subprocess, pexpect
 import uuid

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 from subprocess import Popen, PIPE
 from PyQt4.QtCore import *
