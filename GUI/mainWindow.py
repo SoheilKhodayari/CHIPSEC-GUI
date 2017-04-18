@@ -824,9 +824,9 @@ class mainWindow(QtGui.QWidget):
 		sheet = wbk.add_sheet("sheet", cell_overwrite_ok=True)
 
 		for currentColumn in range(categoryTable.cols):
-		    for currentRow in range(categoryTable.rows):
+		    for currentRow in range(categoryTable.rows): 
 		        try:
-					teext = str(categoryTable.item(currentRow, currentColumn).text())
+					teext = u"{0}".format(categoryTable.item(currentRow, currentColumn).text())
 					teext.strip()
 					if teext == "YELLOW":
 						style = xlwt.XFStyle()
