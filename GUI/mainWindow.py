@@ -532,7 +532,7 @@ class mainWindow(QtGui.QWidget):
 		if descShort == ADDITIONAL_TEST_I_SHORT_MSG:
 			msg.setText(message)
 		else:
-			msg.setText("{0}".format(message))
+			msg.setText("          {0}              ".format(message))
 		msg.setInformativeText(descShort)
 		msg.setWindowTitle("Info")
 		msg.setDetailedText(descDetailed)

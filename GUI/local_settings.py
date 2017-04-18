@@ -75,52 +75,51 @@ AVAILABLE_TESTS = QRY_MODULE_PATH.keys()
 
 # When user requests the test summary window from the top bar and the window
 # is not yet available (no test has runned)
-SHOW_TEST_SUMMARY_REQUEST_ERROR_TITLE = "Unauthorized Action"
-SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG = "No Test Summary Exists Yet!"
+SHOW_TEST_SUMMARY_REQUEST_ERROR_TITLE = u"Unauthorized Action"
+SHOW_TEST_SUMMARY_REQUEST_ERROR_LMSG = u"عملیات انتخابی غیرمجاز است! هیچ نتیجه ای از تست ها موجود نیست."
 # ----------------------------------------------------------------------------- #
 #						Test Names And Explanations
 # ----------------------------------------------------------------------------- #
 
 
-TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
-				'bios_smi': 'msg2',
-				'bios_ts': 'msg3',
-				'bios_wp': 'msg4',
-				'ia32cfg': 'msg5',
-				'rtclock': 'msg6',
-				'smm': 'msg7',
-				'smrr': 'msg8',
-				'spi_desc': 'msg9',
-				'spi_fdopss': 'msg10',
-				'spi_lock':'msg11',
-				'memconfig':'msg11',
-				'remap':'msg11',
-				'smm_dma':'msg11',
-				'variables':'msg11',
-				'access_uefispec':'msg11',
-				's3bootscript':'msg11'
+DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': u'Module: Pre-boot Passwords in the BIOS Keyboard Buffer \nآزمون : گذرواژه قبل از بوت درون بافر حروف بایوس  \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nBIOS Keyboard Buffer',
+				'bios_smi': u'Module: SMI Events Configuration \nآزمون : پیکربندی رویدادهای SMI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nSMM_BWP\nSMI_LOCK\nTCO_LOCK\nGlobal SMI EN\nTCO EN',
+				'bios_ts': u'Module: BIOS Interface Lock (including Top Swap Mode) \nآزمون : قفل رابط بایوس \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nBILD\nTSS',
+				'bios_wp': u'Module: BIOS Region Write Protection \nآزمون : محافظت از ناحیه بایوس درون حافظه دربرابر نوشتن \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nBIOSWE (BIOS Write Enable)\nBLE (BIOS Lock Enable)\nSRC (SPI Read Configuration)\nTSS (Top Swap Status)\nSMM_BWP (SMM BIOS Write Protection)',
+				'ia32cfg': u'Module: IA32 Feature Control Lock \nآزمون : کنترل قفل IA32 \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nLock',
+				'rtclock': u'Module: Protected RTC memory locations \nآزمون : محافظت از مکان حافظه RTC \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nUE\nLL\nUL',
+				'smm': u'Module: Compatible SMM memory (SMRAM) Protection \nآزمون : محافظت از ناحیه بایوس درون حافظه دربرابر نوشتن \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nC_BASE_SEG\nG_SMRAME\nD_LCK\nD_CLS\nD_OPEN',
+				'smrr': u'Module: CPU SMM Cache Poisoning / System Management Range Registers\nآزمون : حمله به SMM از طریق آلوده کردن حافظه کش پردازنده \n\nموارد کنترلی زیر در این آزمون بررسی خواهند شد :\nChecking SMRR range base programming\nChecking SMRR range mask programming\nVerifying that SMRR range base & mask are the same on all logical CPUs\nIA32_SMRR_PHYSBASE',
+				'spi_desc': u'Module: SPI Flash Region Access Control \nآزمون :کنترل دسترسی به ناحیه فلش SPI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nBRRA\nBRWA',
+				'spi_fdopss': u'Module: SPI Flash Descriptor Security Override Pin-Strap \nآزمون : وضعیت امنیتی پین-بند توصیف گر حافظه فلش SPI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nFDOPSS',
+				'spi_lock':u'Module: SPI Flash Controller Configuration Lock \nآزمون : قفل پیکربندی کنترل کننده حافظه فلش SPI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nFLOCKDN\nFDONE\nFCERR\nBERASE\nAEL\nSCIP',
+				'memconfig':u'Module: Host Bridge Memory Map Locks\nآزمون : قفل های نگاشت حافظه (Host Bridge) \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nBDSM\nBGSM\nDPR\nGGC\nMESEG_MASK\nPAVPC\nREMAPBASE\nREMAPLIMIT\nTOLUD\nTOM\nTOUUD\nTSEGMB',
+				'remap':u'Module: Memory Remapping Configuration\nآزمون : تنظیمات نگاشت حافظه \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nRemap window configuration\nTOUUD\nTOLUD',
+				'smm_dma':u'Module: SMM TSEG Range Configuration Check\nآزمون : بررسی تنظیمات ناحیه TSEG در حالت SMM \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nTSEG\nSMRR range',
+				'variables':u'Module: Attributes of Secure Boot EFI Variables\nآزمون : متغییرهای بوت امن در EFI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nSecureBoot\nSetupMode\nPK\nKEK\ndb\ndbx',
+				'access_uefispec':u'Module: Access Control of EFI Variables\nآزمون : کنترل دسترسی به متغییرهای EFI \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nLangCodes\nLang\nTimeout\nConIn\nConOut\nErrOut\nConInDev\nConOutDev\nErrOutDev\nBoot####\nBootOrder\nBootNext\nBootCurrent\nDriver####\nSignatureSupport\nSecureBoot\nSetupMode\nPK\nKEK\ndb\ndbx',
+				's3bootscript':u'Module: S3 Resume Boot-Script Protections\nآزمون : امنیت اسکریپت بوت پس از خروج از حالت خواب سیستم \n\nبیت های کنترلی زیر در این آزمون بررسی خواهند شد :\nS3 boot-script address\nEntry-points of Dispatch opcodes'
 				}
 
 
-DETAILED_TEST_TOOL_TIPS = {'bios_kbrd_buffer': 'msg1',
-				'bios_smi': 'msg2',
-				'bios_ts': 'msg3',
-				'bios_wp': 'msg4',
-				'ia32cfg': 'msg5',
-				'rtclock': 'msg6',
-				'smm': 'msg7',
-				'smrr': 'msg8',
-				'spi_desc': 'msg9',
-				'spi_fdopss': 'msg10',
-				'spi_lock':'msg11',
-				'memconfig':'msg11',
-				'remap':'msg11',
-				'smm_dma':'msg11',
-				'variables':'msg11',
-				'access_uefispec':'msg11',
-				's3bootscript':'msg11'
+TEST_TOOL_TIPS = {'bios_kbrd_buffer': u'آزمون تست گذرواژه قبل از بوت درون بافر حروف',
+				'bios_smi': u'آزمون پیکربندی رویدادهای SMI',
+				'bios_ts': u'آزمون قفل رابط بایوس',
+				'bios_wp': u'آزمون حفاظت از ناحیه بایوس درون حافظه در برابر نوشتن',
+				'ia32cfg': u'کنترل قفل IA32',
+				'rtclock': u'آزمون محافظت از مکان حافظه RTC',
+				'smm': u'آزمون محافظت از ناحیه بایوس درون حافظه در برابر نوشتن',
+				'smrr': u'آزمون حمله به SMM از طریق آلوده کردن حافظه کش پردازنده',
+				'spi_desc': u'کنترل دسترسی به ناحیه فلش SPI',
+				'spi_fdopss': u'آزمون وضعیت امنیتی پین-بند توصیفگر حافظه فلش SPI',
+				'spi_lock':u'آزمون قفل پیکربندی کنترل کننده SPI',
+				'memconfig':u'آزمون قفل های نگاشت حافظه',
+				'remap':u'آزمون تنظیمات نگاشت حافظه',
+				'smm_dma':u'آزمون بررسی ناحیه TSEG در حالت SMM',
+				'variables':u'آزمون متغییرهای بوت امن',
+				'access_uefispec':u'آزمون کنترل دسترسی به متغییرهای EFI',
+				's3bootscript':u'آزمون کنترل امنیت اسکریپت بوت پس از خروج از حالت خواب سیستم'
 				}
-
 
 ADDITIONAL_TEST_USAGE_MESSAGE = u"شما میتوانید فایلهای تست خود را نیز اجرا کنید!"
 ADDITIONAL_TEST_I_SHORT_MSG = u"توجه نمایید که این تست فقط هنگامی اجرا میگردد که از پنجره کناری فعال شده باشد."
@@ -133,23 +132,23 @@ ADDITIONAL_TEST_I_LONG_MSG = "Test Format is Intel's Chipsec Format, see github.
 # ----------------------------------------------------------------------------- #
 
 
-VERBOSE_MODE_SHORT_MSG = "This will activate verbose mode."
-VERBOSE_MODE_LONG_MSG = "Equivalant to -v --verbose commandline!"
+VERBOSE_MODE_SHORT_MSG = u"فعال شدن حالت تشریح مراحل آزمون ها"
+VERBOSE_MODE_LONG_MSG = u"این حالت (مد سیستم) در صورتی مفید خواهد بود که ابزار به درستی نتواند اجرا شود و خروجی آن نامشخص باشد، از این گزینه می توان برای یافتن مشکل احتمالی استفاده کرد. دراین حالت مراحل آزمون ها خط به خط توضیح داده خواهد شد."
 
-DEBUG_MODE_SHORT_MSG = "show debug output"
-DEBUG_MODE_LONG_MSG = "Equivalant to -d --debug commandline!"
+DEBUG_MODE_SHORT_MSG = u"نمایش خروجی debug"
+DEBUG_MODE_LONG_MSG = u"ورود به ناحیه Debug کردن، خروجی ابزار دیباگ خواهد شد و در صورت اشکال نمایش داده می شود.(تنها اشکالات خود ابزار قابل بررسی است)"
 
-FAILFAST_MODE_SHORT_MSG = "fail on any exception and exit (don't mask exceptions)"
-FAILFAST_MODE_LONG_MSG = "Equivalant to -d --debug commandline!"
+FAILFAST_MODE_SHORT_MSG = u"خروج پس از هر گونه خطایی"
+FAILFAST_MODE_LONG_MSG = u"در صورتی که هر گونه خطایی رخ دهد ابزار از ادامه کار بایستند و خارج شود."
 
-NOTIME_MODE_SHORT_MSG = "don't log timestamps"
-NOTIME_MODE_LONG_MSG = "Equivalant to --no_time commandline!"
+NOTIME_MODE_SHORT_MSG = u"زمان های وقوع event در سیستم را نمایش نده"
+NOTIME_MODE_LONG_MSG = u"با استفاده از این دستور می توان گزارش timestampها را حذف نمود."
 
-IGNORE_PLATFORM_MODE_SHORT_MSG = "run chipsec even if the platform is not recognized"
-IGNORE_PLATFORM_MODE_LONG_MSG = "Equivalant to -i --ignore_platform commandline!"
+IGNORE_PLATFORM_MODE_SHORT_MSG = u"اجرای ابزار بدون در نظر گرفتن نوع پلتفرم"
+IGNORE_PLATFORM_MODE_LONG_MSG = u"در صورتی که ابزار نتواند پلتفرم سیستم مورد نظر را تشخیص دهد و یا آن پلتفرم توسط ابزار پشتیبانی نشود می-توان با دستور –i ابزار را وادار به اجرا کرد. نکته: در این حالت خروجی ابزار میتواند صحیح نباشد."
 
-NODRIVER_MODE_SHORT_MSG = "chipsec won't need kernel mode functions so don't load chipsec driver"
-NODRIVER_MODE_LONG_MSG = "Equivalant to -n --no_driver commandline!"
+NODRIVER_MODE_SHORT_MSG = u"غیر فعال کردن درایورهای ابزار"
+NODRIVER_MODE_LONG_MSG = u"در این حالت ابزار نیازی به توابع سطح کرنل ندارد، بنابراین ابزار از درایورهای خود استفاده نخواهد کرد که می توان با دستور -n آن را فعال کرد."
 
 
 # ----------------------------------------------------------------------------- #
