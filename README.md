@@ -1,8 +1,15 @@
-CHIPSEC: Platform Security Assessment Framework
+CHIPSEC GUI: Platform Security Assessment Framework
 ===============================================
 
 [![Build Status](https://travis-ci.org/chipsec/chipsec.svg?branch=master)](https://travis-ci.org/chipsec/chipsec)
 
+A unique Python GUI for CHIPSEC library based on live bootable Linux.
+
+### Setup and Installation
+Install a live bootable Ubuntu (14.04 upwards) on a USB stick and follow the instructions provided on the 'installation_manual.txt' file on the repository.
+The software can be started by the command 'python GUI/main.py'.
+
+### About CHIPSEC
 CHIPSEC is a framework for analyzing the security of PC platforms including hardware, system firmware (BIOS/UEFI), and platform components. It includes a security test suite, tools for accessing various low level interfaces, and forensic capabilities. It can be run on Windows, Linux, Mac OS X and UEFI shell. Instructions for installing and using CHIPSEC can be found in the [manual](chipsec-manual.pdf).
 
 NOTE: This software is for security testing purposes. Use at your own risk. Read [WARNING.txt](chipsec/WARNING.txt) before using.
